@@ -1,12 +1,777 @@
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.8) ~  Much Love, Ferib 
 
-]]--
 
-local v0=string.char;local v1=string.byte;local v2=string.sub;local v3=bit32 or bit ;local v4=v3.bxor;local v5=table.concat;local v6=table.insert;local function v7(v254,v255) local v256={};for v309=1, #v254 do v6(v256,v0(v4(v1(v2(v254,v309,v309 + 1 )),v1(v2(v255,1 + (v309% #v255) ,1 + (v309% #v255) + 1 )))%256 ));end return v5(v256);end local v8=game:GetService(v7("\225\207\218\60\227\169\212","\126\177\163\187\69\134\219\167"));local v9=game:GetService(v7("\22\222\47\215\213\45\221\63\209\207\38\223\60\204\255\38","\156\67\173\74\165"));local v10=game:GetService(v7("\6\162\71\37\185\52\80\61\180\76","\38\84\215\41\118\220\70"));local v11=game:GetService(v7("\98\19\50\30\247\83\23\54\23\250\99\2\45\0\255\87\19","\158\48\118\66\114"));local v12=game:GetService(v7("\135\45\23\62\103\172\245\172","\155\203\68\112\86\19\197"));local v13=v8.LocalPlayer;local v14=workspace.CurrentCamera;local v15=workspace:WaitForChild(v7("\116\200\56\232\73\117\224\209\82\216\59\239","\152\38\189\86\156\32\24\133"));local v16=v13:WaitForChild(v7("\204\91\166\95\249\69\128\83\245","\38\156\55\199"));local v17=Instance.new(v7("\155\126\110\45\22\122\221\86\161","\35\200\29\28\72\115\20\154"));v17.Name=v7("\45\186\221\218\157\35\38\13\152\196\214","\84\121\223\177\191\237\76");v17.Parent=v16;v17.ResetOnSpawn=false;local v21=Instance.new(v7("\157\68\200\173\63","\161\219\54\169\192\90\48\80"));v21.Name=v7("\125\71\12\32\89\77\18\49\121\67\14\32\69","\69\41\34\96");v21.Size=UDim2.new(0 + 0 ,1561 -(810 + 251) ,0 + 0 ,154 + 346 );v21.AnchorPoint=Vector2.new(0.5 + 0 ,0.5);v21.Position=UDim2.new(0.5,0,533.5 -(43 + 490) ,733 -(711 + 22) );v21.BackgroundColor3=Color3.fromRGB(77 -57 ,20,879 -(240 + 619) );v21.BorderSizePixel=0;v21.Parent=v17;local v29=Instance.new(v7("\136\198\207\30\32\62\168\215\216\4","\75\220\163\183\106\98"));v29.Name=v7("\54\181\140\48\213\7\152\158\35\205\13\180","\185\98\218\235\87");v29.Size=UDim2.new(0 + 0 ,95 -35 ,0,2 + 28 );v29.Position=UDim2.new(1745 -(1344 + 400) , -(475 -(255 + 150)),1, -(32 + 8));v29.AnchorPoint=Vector2.new(1 + 0 ,4 -3 );v29.BackgroundColor3=Color3.fromRGB(50,50,50);v29.BorderSizePixel=0;v29.Text=v7("\227\53\35\227","\202\171\92\71\134\190");v29.TextColor3=Color3.new(3 -2 ,1740 -(404 + 1335) ,407 -(183 + 223) );v29.TextScaled=true;v29.Parent=v17;v29.MouseButton1Click:Connect(function() local v257=0 -0 ;while true do if (0==v257) then v21.Visible= not v21.Visible;v29.Text=(v21.Visible and v7("\1\200\40\141","\232\73\161\76")) or v7("\136\209\77\74","\126\219\185\34\61") ;break;end end end);local v40=Instance.new(v7("\42\220\95\127\123","\135\108\174\62\18\30\23\147"));v40.Name=v7("\154\236\44\223\59\161\63\210\187\231","\167\214\137\74\171\120\206\83");v40.Size=UDim2.new(0 + 0 ,90 + 160 ,1,0);v40.Position=UDim2.new(337 -(10 + 327) ,0,0,0 + 0 );v40.BackgroundTransparency=339 -(118 + 220) ;v40.Parent=v21;local v46=Instance.new(v7("\173\226\51\80\253","\199\235\144\82\61\152"));v46.Name=v7("\53\31\190\35\19\53\182\39\18\27\183","\75\103\118\217");v46.Size=UDim2.new(0 + 0 ,699 -(108 + 341) ,1 + 0 ,0);v46.Position=UDim2.new(0,1056 -806 ,1493 -(711 + 782) ,0 -0 );v46.BackgroundTransparency=1;v46.Parent=v21;local v52=Instance.new(v7("\225\70\113\25\188","\126\167\52\16\116\217"));v52.Name=v7("\225\58\37\141\167\42\249\203\58\41\143\186","\156\168\78\64\224\212\121");v52.Size=UDim2.new(1,469 -(270 + 199) ,0,73 + 152 );v52.Position=UDim2.new(1819 -(580 + 1239) ,0 -0 ,0,0 + 0 );v52.BackgroundTransparency=1 + 0 ;v52.Parent=v40;local v58=Instance.new(v7("\51\235\189\218\43\239\167\203\11","\174\103\142\197"));v58.Name=v7("\127\60\90\53\54\114\249\84\45\83","\152\54\72\63\88\69\62");v58.Size=UDim2.new(0 + 0 ,230,0,52 -32 );v58.Position=UDim2.new(0 + 0 ,1177 -(645 + 522) ,0,1795 -(1010 + 780) );v58.BackgroundTransparency=1 + 0 ;v58.Text=v7("\253\208\235\81\148\240\235\80\209\212\225\78\192\197\250\85\219\202","\60\180\164\142");v58.TextColor3=Color3.new(1,4 -3 ,2 -1 );v58.TextScaled=true;v58.Parent=v52;local v67=Instance.new(v7("\108\91\29\61\5\248\6\76\81\11","\114\56\62\101\73\71\141"));v67.Name=v7("\154\251\210\202\191\200\215\200\154\252\207\208\183\231","\164\216\137\187");v67.Size=UDim2.new(1836 -(1045 + 791) ,278 -168 ,0 -0 ,535 -(351 + 154) );v67.Position=UDim2.new(1574 -(1281 + 293) ,276 -(28 + 238) ,0,30);v67.BackgroundColor3=Color3.fromRGB(111 -61 ,1609 -(1381 + 178) ,47 + 3 );v67.BorderSizePixel=0 + 0 ;v67.Text=v7("\240\244\56\188\161\190\42\222\234\113\155\178\251\6\193","\107\178\134\81\210\198\158");v67.TextColor3=Color3.new(1 + 0 ,3 -2 ,1);v67.TextScaled=true;v67.Parent=v52;local v77=Instance.new(v7("\12\11\154\210\136\45\26\150\201\164","\202\88\110\226\166"));v77.Name=v7("\225\29\139\249\205\240\10\142\242\201\215\10\134\213\223\215\27\141\249","\170\163\111\226\151");v77.Size=UDim2.new(0 + 0 ,580 -(381 + 89) ,0 + 0 ,21 + 9 );v77.Position=UDim2.new(0 -0 ,1286 -(1074 + 82) ,0 -0 ,1814 -(214 + 1570) );v77.BackgroundColor3=Color3.fromRGB(1505 -(990 + 465) ,21 + 29 ,50);v77.BorderSizePixel=0;v77.Text=v7("\51\34\187\54\73\119\26\20\60\183\59\90\50\45","\73\113\80\210\88\46\87");v77.TextColor3=Color3.new(1 + 0 ,1,1 + 0 );v77.TextScaled=true;v77.Parent=v52;local v87=Instance.new(v7("\181\41\213\6\197\148\56\217\29\233","\135\225\76\173\114"));v87.Name=v7("\41\249\183\162\169\142\162\22\232\187\164\169\185\133\15\249\172\191\162","\199\122\141\216\208\204\221");v87.Size=UDim2.new(0 -0 ,1956 -(1668 + 58) ,626 -(512 + 114) ,30);v87.Position=UDim2.new(0 -0 ,10,0 -0 ,226 -161 );v87.BackgroundColor3=Color3.fromRGB(24 + 26 ,10 + 40 ,50);v87.BorderSizePixel=0;v87.Text=v7("\158\201\31\226\125\182\158\216\28\245\123\226\168\217","\150\205\189\112\144\24");v87.TextColor3=Color3.new(1 + 0 ,1,1);v87.TextScaled=true;v87.Parent=v52;local v97=Instance.new(v7("\22\135\173\67\8\132\24\30\34\162\173\77\9\141","\112\69\228\223\44\100\232\113"));v97.Name=v7("\253\11\2\222\165\80\143\199\11","\230\180\127\103\179\214\28");v97.Size=UDim2.new(0,775 -545 ,1994 -(109 + 1885) ,1544 -(1269 + 200) );v97.Position=UDim2.new(0 -0 ,825 -(98 + 717) ,0,926 -(802 + 24) );v97.BackgroundColor3=Color3.fromRGB(68 -28 ,50 -10 ,40);v97.BorderSizePixel=0;v97.Parent=v52;local v104=Instance.new(v7("\185\44\115\79\247\85\204\141\28\80\83\240","\128\236\101\63\38\132\33"));v104.Parent=v97;v104.SortOrder=Enum.SortOrder.LayoutOrder;local v108=Instance.new(v7("\152\172\9\80\154\234\205\169\165","\175\204\201\113\36\214\139"));v108.Name=v7("\116\201\57\217\7\83\201\49\245\16\66\193\38\248\13\84\220\57\221\29\107\205\55\217\8","\100\39\172\85\188");v108.Size=UDim2.new(0,230,0,6 + 34 );v108.Position=UDim2.new(0 + 0 ,2 + 8 ,0 + 0 ,486 -311 );v108.BackgroundTransparency=1;v108.TextColor3=Color3.new(3 -2 ,1 + 0 ,1);v108.TextScaled=true;v108.Text=v7("\158\125\181\133\48\185\125\189\192\26\185\125\180\147\105\237\86\182\142\54","\83\205\24\217\224");v108.Parent=v52;local v117={};local function v118() local v258=0 + 0 ;local v259;while true do if (1==v258) then if ( #v259>(0 + 0)) then v108.Text=v7("\213\192\193\56\229\209\200\57\166\236\217\56\235\214\151\125","\93\134\165\173")   .. table.concat(v259,v7("\242\178","\30\222\146\161\162\90\174\210")) ;else v108.Text=v7("\214\75\124\15\230\90\117\14\165\103\100\15\232\93\42\74\203\65\126\15","\106\133\46\16");end break;end if (v258==(0 + 0)) then v259={};for v364,v365 in pairs(v117) do table.insert(v259,v364);end v258=1 + 0 ;end end end local function v119() for v310,v311 in ipairs(v97:GetChildren()) do if v311:IsA(v7("\108\37\107\232\120\85\76\52\124\242","\32\56\64\19\156\58")) then v311:Destroy();end end local v260={};for v312,v313 in ipairs(v15:GetChildren()) do local v314=1433 -(797 + 636) ;local v315;while true do if (v314==(0 -0)) then v315=v313.Name;v260[v315]=(v260[v315] or (1619 -(1427 + 192))) + 1 + 0 ;break;end end end for v316,v317 in pairs(v260) do local v318=0;local v319;while true do if (v318==(6 -3)) then v319.Parent=v97;v319.MouseButton1Click:Connect(function() local v381=0 + 0 ;while true do if (v381==0) then if v117[v316] then local v438=0;while true do if (v438==(0 + 0)) then v117[v316]=nil;v319.BackgroundColor3=Color3.fromRGB(386 -(192 + 134) ,60,1336 -(316 + 960) );break;end end else local v439=0;while true do if (v439==0) then v117[v316]=true;v319.BackgroundColor3=Color3.fromRGB(80,45 + 35 ,80);break;end end end v118();break;end end end);break;end if (v318==(1 + 0)) then v319.Text=v316   .. v7("\25\30","\107\57\54\43\157\21\230\231")   .. v317   .. ")" ;v319.BorderSizePixel=0 + 0 ;v318=7 -5 ;end if (v318==2) then v319.TextScaled=true;if v117[v316] then v319.BackgroundColor3=Color3.fromRGB(80,631 -(83 + 468) ,1886 -(1202 + 604) );else v319.BackgroundColor3=Color3.fromRGB(60,280 -220 ,99 -39 );end v318=8 -5 ;end if (0==v318) then local v372=325 -(45 + 280) ;while true do if (v372==(1 + 0)) then v318=1;break;end if ((0 + 0)==v372) then v319=Instance.new(v7("\110\205\253\66\120\231\148\78\199\235","\224\58\168\133\54\58\146"));v319.Size=UDim2.new(1 + 0 ,0,0 + 0 ,30);v372=1 + 0 ;end end end end end v97.CanvasSize=UDim2.new(0 -0 ,0,1911 -(340 + 1571) ,v104.AbsoluteContentSize.Y);v118();end spawn(function() while true do local v320=0 + 0 ;local v321;while true do if (v320==(1772 -(1733 + 39))) then v321=0 -0 ;while true do if (v321==(1034 -(125 + 909))) then wait(1948.1 -(1096 + 852) );v119();break;end end break;end end end end);local function v120(v262) local v263=v13.Character or v13.CharacterAdded:Wait() ;local v264=v263:FindFirstChild(v7("\243\158\28\244\183\211\198\223\185\30\250\173\236\206\201\159","\175\187\235\113\149\217\188"));if v264 then if (v262:IsA(v7("\17\160\133\73\239","\24\92\207\225\44\131\25")) and v262.PrimaryPart) then v262:SetPrimaryPartCFrame(v264.CFrame);elseif v262:IsA(v7("\105\210\171\73\43\124\89\199","\29\43\179\216\44\123")) then v262.CFrame=v264.CFrame;end end end v67.MouseButton1Click:Connect(function() local v265=0;while true do if (v265==(0 + 0)) then for v373,v374 in ipairs(v15:GetChildren()) do v120(v374);end v117={};v265=1 -0 ;end if (v265==1) then v118();v119();break;end end end);v77.MouseButton1Click:Connect(function() local v266=0 + 0 ;local v267;while true do if (v266==0) then v267=0;while true do if (v267==(513 -(409 + 103))) then v118();v119();break;end if (v267==(236 -(46 + 190))) then for v416,v417 in pairs(v117) do for v427,v428 in ipairs(v15:GetChildren()) do if (v428.Name==v416) then v120(v428);end end end v117={};v267=1;end end break;end end end);v87.MouseButton1Click:Connect(function() local v268=95 -(51 + 44) ;local v269;while true do if (v268==(0 + 0)) then v269=0;while true do if (v269==(1318 -(1114 + 203))) then v118();v119();break;end if (v269==(726 -(228 + 498))) then for v418,v419 in pairs(v117) do for v429,v430 in ipairs(v15:GetChildren()) do if (v430.Name==v418) then local v440=0 + 0 ;local v441;while true do if (v440==(0 + 0)) then v441={[664 -(174 + 489) ]=v430};v11.Remotes.StoreItem:FireServer(unpack(v441));break;end end end end end v117={};v269=2 -1 ;end end break;end end end);local v121=Instance.new(v7("\155\203\33\65\184","\44\221\185\64"));v121.Name=v7("\39\242\68\83\81\19\238\79\87\103\50\226\75\75\122\14\233","\19\97\135\40\63");v121.Size=UDim2.new(1906 -(830 + 1075) ,524 -(303 + 221) ,1269 -(231 + 1038) ,75);v121.Position=UDim2.new(0 + 0 ,1162 -(171 + 991) ,0 -0 ,604 -379 );v121.BackgroundTransparency=2 -1 ;v121.Parent=v40;local v127=Instance.new(v7("\154\89\43\47\13\36\186\72\60\53","\81\206\60\83\91\79"));v127.Name=v7("\104\190\220\126\13\209\68\163\70\191\242\103\59\215\66\170","\196\46\203\176\18\79\163\45");v127.Size=UDim2.new(0 + 0 ,806 -576 ,0 -0 ,48 -18 );v127.Position=UDim2.new(0 -0 ,1258 -(111 + 1137) ,158 -(91 + 67) ,20);v127.BackgroundColor3=Color3.fromRGB(50,148 -98 ,13 + 37 );v127.BorderSizePixel=523 -(423 + 100) ;v127.Text=v7("\158\55\114\18\6\233\230\191\42\106\68\100\212\201\158","\143\216\66\30\126\68\155");v127.TextColor3=Color3.new(1,1,1 + 0 );v127.TextScaled=true;v127.Parent=v121;v127.MouseButton1Click:Connect(function() if  not _G.FullBrightExecuted then _G.FullBrightEnabled=false;_G.NormalLightingSettings={[v7("\136\218\4\204\205\183\217\228\185\219","\129\202\168\109\171\165\195\183")]=v12.Brightness,[v7("\1\84\56\219\213\32\239\47\93","\134\66\56\87\184\190\116")]=v12.ClockTime,[v7("\26\62\14\158\23\239","\85\92\81\105\219\121\139\65")]=v12.FogEnd,[v7("\218\191\95\71\125\211\206\187\81\65\115\200\238","\191\157\211\48\37\28")]=v12.GlobalShadows,[v7("\254\18\246\21\63\209\11","\90\191\127\148\124")]=v12.Ambient};v12:GetPropertyChangedSignal(v7("\90\149\39\16\112\147\32\18\107\148","\119\24\231\78")):Connect(function() if ((v12.Brightness~=1) and (v12.Brightness~=_G.NormalLightingSettings.Brightness)) then local v382=0 -0 ;local v383;while true do if (v382==0) then v383=0;while true do if (v383==(0 + 0)) then _G.NormalLightingSettings.Brightness=v12.Brightness;if  not _G.FullBrightEnabled then repeat wait();until _G.FullBrightEnabled end v383=772 -(326 + 445) ;end if (v383==(4 -3)) then v12.Brightness=2 -1 ;break;end end break;end end end end);v12:GetPropertyChangedSignal(v7("\161\33\170\73\215\116\24\143\40","\113\226\77\197\42\188\32")):Connect(function() if ((v12.ClockTime~=12) and (v12.ClockTime~=_G.NormalLightingSettings.ClockTime)) then _G.NormalLightingSettings.ClockTime=v12.ClockTime;if  not _G.FullBrightEnabled then repeat wait();until _G.FullBrightEnabled end v12.ClockTime=27 -15 ;end end);v12:GetPropertyChangedSignal(v7("\28\25\243\144\52\18","\213\90\118\148")):Connect(function() if ((v12.FogEnd~=(787254 -(530 + 181))) and (v12.FogEnd~=_G.NormalLightingSettings.FogEnd)) then local v385=0;while true do if (v385==(882 -(614 + 267))) then v12.FogEnd=786543;break;end if (v385==(32 -(19 + 13))) then _G.NormalLightingSettings.FogEnd=v12.FogEnd;if  not _G.FullBrightEnabled then repeat wait();until _G.FullBrightEnabled end v385=1 -0 ;end end end end);v12:GetPropertyChangedSignal(v7("\124\34\187\84\76\87\29\188\87\73\84\57\167","\45\59\78\212\54")):Connect(function() if ((v12.GlobalShadows~=false) and (v12.GlobalShadows~=_G.NormalLightingSettings.GlobalShadows)) then _G.NormalLightingSettings.GlobalShadows=v12.GlobalShadows;if  not _G.FullBrightEnabled then repeat wait();until _G.FullBrightEnabled end v12.GlobalShadows=false;end end);v12:GetPropertyChangedSignal(v7("\49\91\129\130\131\32\185","\144\112\54\227\235\230\78\205")):Connect(function() if ((v12.Ambient~=Color3.fromRGB(178,178,178)) and (v12.Ambient~=_G.NormalLightingSettings.Ambient)) then local v387=0 -0 ;local v388;while true do if (0==v387) then v388=0 -0 ;while true do if (v388==(0 + 0)) then _G.NormalLightingSettings.Ambient=v12.Ambient;if  not _G.FullBrightEnabled then repeat wait();until _G.FullBrightEnabled end v388=1 -0 ;end if (v388==(1 -0)) then v12.Ambient=Color3.fromRGB(1990 -(1293 + 519) ,363 -185 ,464 -286 );break;end end break;end end end end);v12.Brightness=1 -0 ;v12.ClockTime=51 -39 ;v12.FogEnd=1852888 -1066345 ;v12.GlobalShadows=false;v12.Ambient=Color3.fromRGB(95 + 83 ,37 + 141 ,413 -235 );local v340=true;spawn(function() local v353=0;while true do if (v353==(0 + 0)) then repeat wait();until _G.FullBrightEnabled while wait() do if (_G.FullBrightEnabled~=v340) then local v435=0 + 0 ;while true do if (v435==0) then if  not _G.FullBrightEnabled then local v462=0 + 0 ;local v463;while true do if (v462==(1096 -(709 + 387))) then v463=1858 -(673 + 1185) ;while true do if (v463==(0 -0)) then v12.Brightness=_G.NormalLightingSettings.Brightness;v12.ClockTime=_G.NormalLightingSettings.ClockTime;v463=3 -2 ;end if (v463==(1 -0)) then v12.FogEnd=_G.NormalLightingSettings.FogEnd;v12.GlobalShadows=_G.NormalLightingSettings.GlobalShadows;v463=2;end if (v463==(2 + 0)) then v12.Ambient=_G.NormalLightingSettings.Ambient;break;end end break;end end else v12.Brightness=1;v12.ClockTime=9 + 3 ;v12.FogEnd=1061958 -275415 ;v12.GlobalShadows=false;v12.Ambient=Color3.fromRGB(178,178,178);end v340= not v340;break;end end end end break;end end end);_G.FullBrightExecuted=true;end _G.FullBrightEnabled= not _G.FullBrightEnabled;v127.Text=v7("\149\61\3\240\242\73\186\47\7\232\138\27","\59\211\72\111\156\176")   .. ((_G.FullBrightEnabled and v7("\97\169","\77\46\231\131")) or v7("\149\114\144","\32\218\52\214")) ;end);local v137=Instance.new(v7("\104\5\48\165\244","\58\46\119\81\200\145\208\37"));v137.Name=v7("\27\128\49\181\172\175\5\46\143\36\165\166\179","\86\75\236\80\204\201\221");v137.Size=UDim2.new(1,0 + 0 ,0.5 -0 ,0 -0 );v137.Position=UDim2.new(0,0,0,1880 -(446 + 1434) );v137.BackgroundTransparency=1;v137.Parent=v46;local v143=Instance.new(v7("\70\68\111\145\210\138\112\68\123","\235\18\33\23\229\158"));v143.Name=v7("\96\182\192\162\85\168\237\186\82\191\205","\219\48\218\161");v143.Size=UDim2.new(1283 -(1040 + 243) ,686 -456 ,1847 -(559 + 1288) ,1951 -(609 + 1322) );v143.Position=UDim2.new(454 -(13 + 441) ,37 -27 ,0 -0 ,5);v143.BackgroundTransparency=4 -3 ;v143.Text=v7("\212\125\125\80\222\93\160\208\116\112\76\203\64\242\240\112\104\64\212\65","\128\132\17\28\41\187\47");v143.TextColor3=Color3.new(1 + 0 ,1,3 -2 );v143.TextScaled=true;v143.Parent=v137;local v152=Instance.new(v7("\53\55\30\46\127\20\38\18\53\83","\61\97\82\102\90"));v152.Name=v7("\159\43\167\78\196\67\46\5\173\55\174\89\229\66\10\29\163\32","\105\204\78\203\43\167\55\126");v152.Size=UDim2.new(0 + 0 ,101 + 129 ,0,89 -59 );v152.Position=UDim2.new(0,6 + 4 ,0,55 -25 );v152.BackgroundColor3=Color3.fromRGB(34 + 16 ,28 + 22 ,36 + 14 );v152.BorderSizePixel=0 + 0 ;v152.Text=v7("\150\175\47\27\16\16\135\97\169\171\58\27\1","\49\197\202\67\126\115\100\167");v152.TextColor3=Color3.new(1,1 + 0 ,1);v152.TextScaled=true;v152.Parent=v137;local v162=Instance.new(v7("\4\88\205\38\140\90\87\57\92\249\59\129\91\91","\62\87\59\191\73\224\54"));v162.Name=v7("\215\14\251\208\226\16\222\219\232\18\254\198\240\12","\169\135\98\154");v162.Size=UDim2.new(433 -(153 + 280) ,664 -434 ,0 + 0 ,60 + 90 );v162.Position=UDim2.new(0 + 0 ,10,0,59 + 6 );v162.BackgroundColor3=Color3.fromRGB(40,29 + 11 ,60 -20 );v162.BorderSizePixel=0 + 0 ;v162.Visible=false;v162.Parent=v137;local v170=Instance.new(v7("\254\94\8\93\238\39\228\202\110\43\65\233","\168\171\23\68\52\157\83"));v170.Parent=v162;v170.SortOrder=Enum.SortOrder.LayoutOrder;local v173=nil;local function v174() local v271=0;while true do if (v271==0) then for v375,v376 in ipairs(v162:GetChildren()) do if v376:IsA(v7("\192\116\237\185\7\56\147\224\126\251","\231\148\17\149\205\69\77")) then v376:Destroy();end end for v377,v378 in ipairs(v8:GetPlayers()) do if (v378~=v13) then local v401=Instance.new(v7("\180\162\223\239\117\234\148\179\200\245","\159\224\199\167\155\55"));v401.Size=UDim2.new(668 -(89 + 578) ,0,0 + 0 ,30);v401.BackgroundColor3=Color3.fromRGB(60,124 -64 ,60);v401.BorderSizePixel=1049 -(572 + 477) ;v401.Text=v378.Name;v401.TextScaled=true;v401.Parent=v162;v401.MouseButton1Click:Connect(function() local v420=0 + 0 ;while true do if (v420==0) then v173=v378;v152.Text=v7("\199\255\61\203\242\225\102\146","\178\151\147\92")   .. v378.Name ;v420=1;end if (v420==1) then v162.Visible=false;break;end end end);end end v271=1;end if (v271==1) then v162.CanvasSize=UDim2.new(0 + 0 ,0 + 0 ,86 -(84 + 2) ,v170.AbsoluteContentSize.Y);break;end end end v152.MouseButton1Click:Connect(function() local v272=0 -0 ;while true do if (v272==(0 + 0)) then v162.Visible= not v162.Visible;if v162.Visible then v174();end break;end end end);spawn(function() while true do local v322=0;local v323;while true do if ((842 -(497 + 345))==v322) then v323=0 + 0 ;while true do if (v323==(0 + 0)) then wait(0.75);if v162.Visible then v174();end break;end end break;end end end end);local v175=Instance.new(v7("\184\248\84\38\48\89\110\152\242\66","\26\236\157\44\82\114\44"));v175.Name=v7("\30\43\217\94\58\33\199\79\30\33\229\87\43\55\208\73\8\59\193\79\37\32","\59\74\78\181");v175.Size=UDim2.new(1333 -(605 + 728) ,165 + 65 ,0,30);v175.Position=UDim2.new(0 -0 ,1 + 9 ,0 -0 ,199 + 21 );v175.BackgroundColor3=Color3.fromRGB(138 -88 ,38 + 12 ,539 -(457 + 32) );v175.BorderSizePixel=0 + 0 ;v175.Text=v7("\17\212\86\95\163\42\195\78\26\135\42\145\106\86\178\60\212\72","\211\69\177\58\58");v175.TextColor3=Color3.new(1403 -(832 + 570) ,1 + 0 ,1 + 0 );v175.TextScaled=true;v175.Parent=v137;v175.MouseButton1Click:Connect(function() if v173 then local v341=0;local v342;while true do if ((0 -0)==v341) then v342=v173.Character;if (v342 and v342:FindFirstChild(v7("\159\240\116\244\231\196\190\225\75\250\230\223\135\228\107\225","\171\215\133\25\149\137"))) then local v421=0 + 0 ;local v422;local v423;local v424;while true do if (v421==0) then v422=v342.HumanoidRootPart.CFrame;v423=v13.Character or v13.CharacterAdded:Wait() ;v421=797 -(588 + 208) ;end if (v421==1) then v424=v423:FindFirstChild(v7("\201\221\63\251\225\63\245\70\211\199\61\238\223\49\238\86","\34\129\168\82\154\143\80\156"));if v424 then v424.CFrame=v422;else warn("Local player's HumanoidRootPart not found.");end break;end end else warn("Selected player's character or HumanoidRootPart not available.");end break;end end else warn(v7("\171\189\115\27\68\79\144\128\160\115\24\77\66\140\134\166\54\15\6","\233\229\210\83\107\40\46"));end end);local v185=Instance.new(v7("\231\80\51\219\0","\101\161\34\82\182"));v185.Name=v7("\201\4\84\252\212\246\177\43\235\25\80\241\213","\78\136\109\57\158\187\130\226");v185.Size=UDim2.new(1,0 -0 ,1800.5 -(884 + 916) ,0);v185.Position=UDim2.new(0 -0 ,0,0.5,0 + 0 );v185.BackgroundTransparency=1;v185.Parent=v46;local v191=Instance.new(v7("\10\58\225\229\18\62\251\244\50","\145\94\95\153"));v191.Name=v7("\220\196\25\215\65\163\209\204\22\208\66","\215\157\173\116\181\46");v191.Size=UDim2.new(653 -(232 + 421) ,230,1889 -(1569 + 320) ,5 + 15 );v191.Position=UDim2.new(0,2 + 8 ,0 -0 ,610 -(316 + 289) );v191.BackgroundTransparency=2 -1 ;v191.Text=v7("\20\189\134\240\213\33\244\184\247\206\33\189\133\245\201","\186\85\212\235\146");v191.TextColor3=Color3.new(1 + 0 ,1454 -(666 + 787) ,1);v191.TextScaled=true;v191.Parent=v185;local v200=Instance.new(v7("\246\132\14\234\27\251\76\214\142\24","\56\162\225\118\158\89\142"));v200.Name=v7("\125\12\205\173\45\204\104\10\199\168\46\221\126\16\212\187\45\214","\184\60\101\160\207\66");v200.Size=UDim2.new(425 -(360 + 65) ,230,0,29 + 1 );v200.Position=UDim2.new(254 -(79 + 175) ,15 -5 ,0,24 + 6 );v200.BackgroundColor3=Color3.fromRGB(30,91 -61 ,57 -27 );v200.Text=v7("\16\171\81\158\30\182\38\252\30\164\90","\220\81\226\28");v200.TextColor3=Color3.fromRGB(1154 -(503 + 396) ,50,50);v200.TextScaled=true;v200.Parent=v185;local v209=Instance.new(v7("\39\208\154\239\200\200\11","\167\115\181\226\155\138"));v209.Name=v7("\196\13\209\104\126\105\210\192\45\255","\166\130\66\135\60\27\17");v209.Size=UDim2.new(181 -(92 + 89) ,446 -216 ,0 + 0 ,30);v209.Position=UDim2.new(0,6 + 4 ,0 -0 ,10 + 60 );v209.BackgroundColor3=Color3.fromRGB(136 -76 ,53 + 7 ,29 + 31 );v209.BorderSizePixel=0 -0 ;v209.Text=v7("\21\25\152","\80\36\42\174\21");v209.TextColor3=Color3.new(1 + 0 ,1 -0 ,1);v209.TextScaled=true;v209.ClearTextOnFocus=true;v209.Parent=v185;local v220=1380 -(485 + 759) ;local v221=false;local v222=Drawing.new(v7("\109\25\37\121\66\21","\26\46\112\87"));v222.Visible=false;v222.Thickness=4 -2 ;v222.Color=Color3.fromRGB(1317 -(442 + 747) ,1135 -(832 + 303) ,1074 -(88 + 858) );v222.Filled=false;v222.Radius=v220;v222.Position=v14.ViewportSize/2 ;local function v229(v273) return v273:IsA(v7("\148\44\175\113\179","\212\217\67\203\20\223\223\37")) and v273:FindFirstChild(v7("\146\152\165\211\180\130\161\214","\178\218\237\200")) and (v273.Humanoid.Health>(0 + 0)) and v273:FindFirstChild(v7("\158\176\231\212","\176\214\213\134")) and v273:FindFirstChild(v7("\220\184\187\213\166\89\80\240\159\185\219\188\102\88\230\185","\57\148\205\214\180\200\54")) and  not v8:GetPlayerFromCharacter(v273) ;end local v230={};local v231=RaycastParams.new();v231.FilterType=Enum.RaycastFilterType.Blacklist;local function v234() local v274={};for v324,v325 in ipairs(workspace:GetDescendants()) do if v229(v325) then v274[v325]=true;end end for v326= #v230,1 + 0 , -(1 + 0) do if  not v274[v230[v326]] then table.remove(v230,v326);end end for v327 in pairs(v274) do if  not table.find(v230,v327) then table.insert(v230,v327);end end end local function v235(v275) local v276=789 -(766 + 23) ;local v277;local v278;local v279;local v280;local v281;local v282;while true do local v328=0 -0 ;while true do if (v328==(0 -0)) then if ((4 -2)==v276) then v280=0.02 -0 ;v281=v277.Position + (v279 * v280) ;v276=3;end if (v276==(1076 -(1036 + 37))) then v282=v278.Position-v277.Position ;return v281 + v282 ;end v328=1;end if (v328==(1 + 0)) then if (v276==0) then local v409=0 -0 ;while true do if (v409==(0 + 0)) then v277=v275:FindFirstChild(v7("\58\232\56\53\120\29\244\49\6\121\29\233\5\53\100\6","\22\114\157\85\84"));v278=v275:FindFirstChild(v7("\236\206\18\192","\200\164\171\115\164\61\150"));v409=1481 -(641 + 839) ;end if (v409==(914 -(910 + 3))) then v276=2 -1 ;break;end end end if (v276==1) then if ( not v277 or  not v278) then return (v278 and v278.Position) or (v277 and v277.Position) ;end v279=v277.Velocity;v276=2;end break;end end end end local function v236() local v283=nil;local v284=math.huge;local v285=v14.ViewportSize/2 ;v231.FilterDescendantsInstances={v13.Character};for v329,v330 in ipairs(v230) do local v331=0;local v332;local v333;local v334;while true do if (v331==0) then v332=v235(v330);v333,v334=v14:WorldToViewportPoint(v332);v331=1 + 0 ;end if (v331==(1149 -(556 + 592))) then if (v334 and (v333.Z>0)) then local v411=0 + 0 ;local v412;while true do if (v411==0) then v412=workspace:Raycast(v14.CFrame.Position,(v332-v14.CFrame.Position).Unit * (1808 -(329 + 479)) ,v231);if (v412 and v412.Instance:IsDescendantOf(v330)) then local v453=(Vector2.new(v333.X,v333.Y) -v285).Magnitude;if ((v453<v284) and (v453<v220)) then local v461=854 -(174 + 680) ;while true do if (v461==(0 -0)) then v284=v453;v283=v330;break;end end end end break;end end end break;end end end return v283;end local function v237(v287) local v288=v14.CFrame;local v289=(v287-v288.Position).Unit;local v290=0.581 -0 ;local v291=v288.LookVector:Lerp(v289,v290);v14.CFrame=CFrame.new(v288.Position,v288.Position + v291 );end local v238=v10.Heartbeat;local v239=0;local v240=0.4;v238:Connect(function(v293) local v294=0 + 0 ;while true do if (v294==(739 -(396 + 343))) then v222.Position=v14.ViewportSize/(1 + 1) ;v222.Radius=v220 * (v14.ViewportSize.Y/1080) ;v294=1;end if (v294==(1478 -(29 + 1448))) then v239=v239 + v293 ;if (v239>=v240) then local v390=1389 -(135 + 1254) ;while true do if (v390==(0 -0)) then v234();v239=0 -0 ;break;end end end v294=2;end if (v294==2) then if v221 then local v391=0;local v392;while true do if (v391==(0 + 0)) then v392=v236();if v392 then local v445=1527 -(389 + 1138) ;local v446;while true do if (v445==(574 -(102 + 472))) then v446=v235(v392);v237(v446);break;end end end break;end end end break;end end end);v209.FocusLost:Connect(function(v295) local v296=0 + 0 ;local v297;while true do if (v296==0) then v297=tonumber(v209.Text);if v297 then v220=v297;else v209.Text=tostring(v220);end break;end end end);v200.MouseButton1Click:Connect(function() local v298=0 + 0 ;while true do if (v298==0) then v221= not v221;v222.Visible=v221;v298=1 + 0 ;end if (v298==(1546 -(320 + 1225))) then v200.Text=v7("\159\221\46\103\172\138\174\67","\227\222\148\99\37")   .. ((v221 and v7("\28\124","\153\83\50\50\150")) or v7("\114\80\85","\45\61\22\19\124\19\203")) ;v200.TextColor3=(v221 and Color3.fromRGB(50,255,50)) or Color3.fromRGB(453 -198 ,31 + 19 ,1514 -(157 + 1307) ) ;break;end end end);v8.PlayerRemoving:Connect(function() v222:Remove();end);local v241,v242,v243;v21.InputBegan:Connect(function(v299) if ((v299.UserInputType==Enum.UserInputType.Touch) or (v299.UserInputType==Enum.UserInputType.MouseButton1)) then local v343=1859 -(821 + 1038) ;while true do if (v343==(0 -0)) then v241=true;v242=v299.Position;v343=1 + 0 ;end if (v343==(1 -0)) then v243=v21.Position;v299.Changed:Connect(function() if (v299.UserInputState==Enum.UserInputState.End) then v241=false;end end);break;end end end end);v21.InputChanged:Connect(function(v300) if (v241 and ((v300.UserInputType==Enum.UserInputType.Touch) or (v300.UserInputType==Enum.UserInputType.MouseMovement))) then local v344=0 + 0 ;local v345;while true do if (v344==0) then v345=v300.Position-v242 ;v21.Position=UDim2.new(v243.X.Scale,v243.X.Offset + v345.X ,v243.Y.Scale,v243.Y.Offset + v345.Y );break;end end end end);local v244=Instance.new(v7("\245\23\21\225\46\113\187\196\30","\217\161\114\109\149\98\16"));v244.Name=v7("\49\50\61\120\181\96\62\33\58\121\176","\20\114\64\88\28\220");v244.Size=UDim2.new(0 -0 ,1226 -(834 + 192) ,0 + 0 ,6 + 14 );v244.Position=UDim2.new(1 + 0 , -(15 -5),1, -(314 -(300 + 4)));v244.AnchorPoint=Vector2.new(1 + 0 ,2 -1 );v244.BackgroundTransparency=363 -(112 + 250) ;v244.TextColor3=Color3.new(1 + 0 ,2 -1 ,1 + 0 );v244.Text=v7("\28\0\214\177\184\210\164\113\53\252\244\202\223\191\61\14\202","\221\81\97\178\212\152\176");v244.TextScaled=true;v244.Parent=v21;game:GetService(v7("\248\244\24\233\51\195\247\8\239\41\200\245\11\242\25\200","\122\173\135\125\155")).InputBegan:Connect(function(v301,v302) if ((v301.KeyCode==Enum.KeyCode.Z) and  not v302) then for v362,v363 in ipairs(v15:GetChildren()) do v120(v363);end v117={};v118();v119();end end);game:GetService(v7("\177\210\5\171\22\63\216\145\213\51\188\45\39\193\135\196","\168\228\161\96\217\95\81")).InputBegan:Connect(function(v303,v304) if ((v303.KeyCode==Enum.KeyCode.X) and  not v304) then local v346=0;while true do if (v346==(0 + 0)) then for v413,v414 in pairs(v117) do for v425,v426 in ipairs(v15:GetChildren()) do if (v426.Name==v413) then v120(v426);end end end v117={};v346=1;end if (v346==1) then v118();v119();break;end end end end);game:GetService(v7("\238\194\43\78\6\89\203\196\58\111\42\69\205\216\45\89","\55\187\177\78\60\79")).InputBegan:Connect(function(v305,v306) if ((v305.KeyCode==Enum.KeyCode.C) and  not v306) then local v347=0;local v348;while true do if ((0 + 0)==v347) then v348=0 + 0 ;while true do if (v348==1) then v118();v119();break;end if (v348==(0 + 0)) then for v436,v437 in pairs(v117) do for v447,v448 in ipairs(v15:GetChildren()) do if (v448.Name==v436) then local v455=0;local v456;while true do if ((1414 -(1001 + 413))==v455) then v456={[1]=v448};v11.Remotes.StoreItem:FireServer(unpack(v456));break;end end end end end v117={};v348=1;end end break;end end end end);game:GetService(v7("\24\221\90\249\111\193\144\56\218\108\238\84\217\137\46\203","\224\77\174\63\139\38\175")).InputBegan:Connect(function(v307,v308) if ((v307.KeyCode==Enum.KeyCode.K) and  not v308) then local v349=0 -0 ;local v350;while true do if (v349==(882 -(244 + 638))) then v350=693 -(627 + 66) ;while true do if (v350==0) then v21.Visible= not v21.Visible;v29.Text=(v21.Visible and v7("\172\72\92\43","\78\228\33\56")) or v7("\253\118\189\20","\229\174\30\210\99") ;break;end end break;end end end end);
+------------------------------------------------------------
+
+-- SERVICES & VARIABLES
+------------------------------------------------------------
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Lighting = game:GetService("Lighting")
+local player = Players.LocalPlayer
+local Cam = workspace.CurrentCamera
+
+-- Folder with runtime items (for item teleportation)
+local runtimeItemsFolder = workspace:WaitForChild("RuntimeItems")
+local playerGui = player:WaitForChild("PlayerGui")
+
+------------------------------------------------------------
+-- MAIN UI: Teleport Panel (Landscape) Setup
+------------------------------------------------------------
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "TeleportGui"
+screenGui.Parent = playerGui
+screenGui.ResetOnSpawn = false
+
+-- Increase panel size to 500x500 to allow extra aimbot and fullbright settings
+local teleportPanel = Instance.new("Frame")
+teleportPanel.Name = "TeleportPanel"
+teleportPanel.Size = UDim2.new(0, 500, 0, 500)
+teleportPanel.AnchorPoint = Vector2.new(0.5, 0.5)
+teleportPanel.Position = UDim2.new(0.5, 0, 0.5, 0)
+teleportPanel.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+teleportPanel.BorderSizePixel = 0
+teleportPanel.Parent = screenGui
+
+------------------------------------------------------------
+-- TOGGLE BUTTON: Show/Hide the Teleport Panel
+------------------------------------------------------------
+local toggleButton = Instance.new("TextButton")
+toggleButton.Name = "ToggleButton"
+toggleButton.Size = UDim2.new(0, 60, 0, 30)
+toggleButton.Position = UDim2.new(1, -70, 1, -40)  -- Bottom-right corner
+toggleButton.AnchorPoint = Vector2.new(1, 1)
+toggleButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+toggleButton.BorderSizePixel = 0
+toggleButton.Text = "Hide"
+toggleButton.TextColor3 = Color3.new(1, 1, 1)
+toggleButton.TextScaled = true
+toggleButton.Parent = screenGui
+
+toggleButton.MouseButton1Click:Connect(function()
+	teleportPanel.Visible = not teleportPanel.Visible
+	toggleButton.Text = teleportPanel.Visible and "Hide" or "Show"
+end)
+
+------------------------------------------------------------
+-- SPLIT THE PANEL INTO LEFT and RIGHT COLUMNS
+------------------------------------------------------------
+-- Left Column: Contains Item Teleportation and FullBright
+local leftColumn = Instance.new("Frame")
+leftColumn.Name = "LeftColumn"
+leftColumn.Size = UDim2.new(0, 250, 1, 0)
+leftColumn.Position = UDim2.new(0, 0, 0, 0)
+leftColumn.BackgroundTransparency = 1
+leftColumn.Parent = teleportPanel
+
+-- Right Column: Split into two halves (Top: Player TP, Bottom: Aimbot Settings)
+local rightColumn = Instance.new("Frame")
+rightColumn.Name = "RightColumn"
+rightColumn.Size = UDim2.new(0, 250, 1, 0)
+rightColumn.Position = UDim2.new(0, 250, 0, 0)
+rightColumn.BackgroundTransparency = 1
+rightColumn.Parent = teleportPanel
+
+------------------------------------------------------------
+-- SECTION 1: ITEM TELEPORTATION (Left Column - Top Part)
+------------------------------------------------------------
+local itemsSection = Instance.new("Frame")
+itemsSection.Name = "ItemsSection"
+-- Increase height to accommodate the selected-items display
+itemsSection.Size = UDim2.new(1, 0, 0, 225)
+itemsSection.Position = UDim2.new(0, 0, 0, 0)
+itemsSection.BackgroundTransparency = 1
+itemsSection.Parent = leftColumn
+
+local itemsLabel = Instance.new("TextLabel")
+itemsLabel.Name = "ItemsLabel"
+itemsLabel.Size = UDim2.new(0, 230, 0, 20)
+itemsLabel.Position = UDim2.new(0, 10, 0, 5)
+itemsLabel.BackgroundTransparency = 1
+itemsLabel.Text = "Item Teleportation"
+itemsLabel.TextColor3 = Color3.new(1, 1, 1)
+itemsLabel.TextScaled = true
+itemsLabel.Parent = itemsSection
+
+local bringAllButton = Instance.new("TextButton")
+bringAllButton.Name = "BringAllButton"
+bringAllButton.Size = UDim2.new(0, 110, 0, 30)
+bringAllButton.Position = UDim2.new(0, 10, 0, 30)
+bringAllButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+bringAllButton.BorderSizePixel = 0
+bringAllButton.Text = "Bring All Items"
+bringAllButton.TextColor3 = Color3.new(1, 1, 1)
+bringAllButton.TextScaled = true
+bringAllButton.Parent = itemsSection
+
+local bringSelectedButton = Instance.new("TextButton")
+bringSelectedButton.Name = "BringSelectedButton"
+bringSelectedButton.Size = UDim2.new(0, 110, 0, 30)
+bringSelectedButton.Position = UDim2.new(0, 130, 0, 30)
+bringSelectedButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+bringSelectedButton.BorderSizePixel = 0
+bringSelectedButton.Text = "Bring Selected"
+bringSelectedButton.TextColor3 = Color3.new(1, 1, 1)
+bringSelectedButton.TextScaled = true
+bringSelectedButton.Parent = itemsSection
+
+local storeSelectedButton = Instance.new("TextButton")
+storeSelectedButton.Name = "StoreSelectedButton"
+storeSelectedButton.Size = UDim2.new(0, 230, 0, 30)
+storeSelectedButton.Position = UDim2.new(0, 10, 0, 65)
+storeSelectedButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+storeSelectedButton.BorderSizePixel = 0
+storeSelectedButton.Text = "Store Selected"
+storeSelectedButton.TextColor3 = Color3.new(1, 1, 1)
+storeSelectedButton.TextScaled = true
+storeSelectedButton.Parent = itemsSection
+
+local itemsList = Instance.new("ScrollingFrame")
+itemsList.Name = "ItemsList"
+itemsList.Size = UDim2.new(0, 230, 0, 75)
+itemsList.Position = UDim2.new(0, 10, 0, 100)
+itemsList.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+itemsList.BorderSizePixel = 0
+itemsList.Parent = itemsSection
+
+local itemsListLayout = Instance.new("UIListLayout")
+itemsListLayout.Parent = itemsList
+itemsListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+-- New: Label to display the names of selected items
+local selectedItemsDisplayLabel = Instance.new("TextLabel")
+selectedItemsDisplayLabel.Name = "SelectedItemsDisplayLabel"
+selectedItemsDisplayLabel.Size = UDim2.new(0, 230, 0, 40)
+selectedItemsDisplayLabel.Position = UDim2.new(0, 10, 0, 175)
+selectedItemsDisplayLabel.BackgroundTransparency = 1
+selectedItemsDisplayLabel.TextColor3 = Color3.new(1, 1, 1)
+selectedItemsDisplayLabel.TextScaled = true
+selectedItemsDisplayLabel.Text = "Selected Items: None"
+selectedItemsDisplayLabel.Parent = itemsSection
+
+-- Table to hold names of selected item groups (keys are item names)
+local selectedItems = {}
+
+local function updateSelectedItemsDisplayLabel()
+    local selectedList = {}
+    for key, _ in pairs(selectedItems) do
+        table.insert(selectedList, key)
+    end
+    if #selectedList > 0 then
+        selectedItemsDisplayLabel.Text = "Selected Items: " .. table.concat(selectedList, ", ")
+    else
+        selectedItemsDisplayLabel.Text = "Selected Items: None"
+    end
+end
+
+local function populateItemsList()
+	-- Clear existing buttons
+	for _, child in ipairs(itemsList:GetChildren()) do
+		if child:IsA("TextButton") then
+			child:Destroy()
+		end
+	end
+	
+	-- Group items by name
+	local groups = {}
+	for _, item in ipairs(runtimeItemsFolder:GetChildren()) do
+		local name = item.Name
+		groups[name] = (groups[name] or 0) + 1
+	end
+	
+	-- Create one button per group, showing "Name (count)"
+	for name, count in pairs(groups) do
+		local itemButton = Instance.new("TextButton")
+		itemButton.Size = UDim2.new(1, 0, 0, 30)
+		itemButton.Text = name .. " (" .. count .. ")"
+		itemButton.BorderSizePixel = 0
+		itemButton.TextScaled = true
+		if selectedItems[name] then
+			itemButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+		else
+			itemButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+		end
+		itemButton.Parent = itemsList
+		
+		itemButton.MouseButton1Click:Connect(function()
+			if selectedItems[name] then
+				selectedItems[name] = nil
+				itemButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+			else
+				selectedItems[name] = true
+				itemButton.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+			end
+			updateSelectedItemsDisplayLabel()
+		end)
+	end
+	-- Update the CanvasSize so all groups can be scrolled into view
+	itemsList.CanvasSize = UDim2.new(0, 0, 0, itemsListLayout.AbsoluteContentSize.Y)
+	updateSelectedItemsDisplayLabel()
+end
+
+-- Auto-refresh the items list every 0.1 seconds
+spawn(function()
+	while true do
+		wait(0.1)
+		populateItemsList()
+	end
+end)
+
+local function teleportItem(item)
+	local character = player.Character or player.CharacterAdded:Wait()
+	local root = character:FindFirstChild("HumanoidRootPart")
+	if root then
+		if item:IsA("Model") and item.PrimaryPart then
+			item:SetPrimaryPartCFrame(root.CFrame)
+		elseif item:IsA("BasePart") then
+			item.CFrame = root.CFrame
+		end
+	end
+end
+
+bringAllButton.MouseButton1Click:Connect(function()
+	for _, item in ipairs(runtimeItemsFolder:GetChildren()) do
+		teleportItem(item)
+	end
+	-- Clear selection after action
+	selectedItems = {}
+	updateSelectedItemsDisplayLabel()
+	populateItemsList()
+end)
+
+bringSelectedButton.MouseButton1Click:Connect(function()
+	-- Iterate over all items and teleport those with matching names
+	for groupName, _ in pairs(selectedItems) do
+		for _, item in ipairs(runtimeItemsFolder:GetChildren()) do
+			if item.Name == groupName then
+				teleportItem(item)
+			end
+		end
+	end
+	-- Clear selection after action
+	selectedItems = {}
+	updateSelectedItemsDisplayLabel()
+	populateItemsList()
+end)
+
+storeSelectedButton.MouseButton1Click:Connect(function()
+	-- For each selected group, store all matching items
+	for groupName, _ in pairs(selectedItems) do
+		for _, item in ipairs(runtimeItemsFolder:GetChildren()) do
+			if item.Name == groupName then
+				local args = { [1] = item }
+				ReplicatedStorage.Remotes.StoreItem:FireServer(unpack(args))
+			end
+		end
+	end
+	-- Clear selection after action
+	selectedItems = {}
+	updateSelectedItemsDisplayLabel()
+	populateItemsList()
+end)
+
+------------------------------------------------------------
+-- SECTION 2: FULLBRIGHT (Left Column - Bottom Part)
+------------------------------------------------------------
+local fullBrightSection = Instance.new("Frame")
+fullBrightSection.Name = "FullBrightSection"
+fullBrightSection.Size = UDim2.new(1, 0, 0, 75)
+fullBrightSection.Position = UDim2.new(0, 0, 0, 225)
+fullBrightSection.BackgroundTransparency = 1
+fullBrightSection.Parent = leftColumn
+
+local fullBrightButton = Instance.new("TextButton")
+fullBrightButton.Name = "FullBrightButton"
+fullBrightButton.Size = UDim2.new(0, 230, 0, 30)
+fullBrightButton.Position = UDim2.new(0, 10, 0, 20)
+fullBrightButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+fullBrightButton.BorderSizePixel = 0
+fullBrightButton.Text = "FullBright: OFF"
+fullBrightButton.TextColor3 = Color3.new(1,1,1)
+fullBrightButton.TextScaled = true
+fullBrightButton.Parent = fullBrightSection
+
+fullBrightButton.MouseButton1Click:Connect(function()
+	-- Run the fullbright code only once
+	if not _G.FullBrightExecuted then
+		_G.FullBrightEnabled = false
+		_G.NormalLightingSettings = {
+			Brightness = Lighting.Brightness,
+			ClockTime = Lighting.ClockTime,
+			FogEnd = Lighting.FogEnd,
+			GlobalShadows = Lighting.GlobalShadows,
+			Ambient = Lighting.Ambient
+		}
+		Lighting:GetPropertyChangedSignal("Brightness"):Connect(function()
+			if Lighting.Brightness ~= 1 and Lighting.Brightness ~= _G.NormalLightingSettings.Brightness then
+				_G.NormalLightingSettings.Brightness = Lighting.Brightness
+				if not _G.FullBrightEnabled then
+					repeat wait() until _G.FullBrightEnabled
+				end
+				Lighting.Brightness = 1
+			end
+		end)
+		Lighting:GetPropertyChangedSignal("ClockTime"):Connect(function()
+			if Lighting.ClockTime ~= 12 and Lighting.ClockTime ~= _G.NormalLightingSettings.ClockTime then
+				_G.NormalLightingSettings.ClockTime = Lighting.ClockTime
+				if not _G.FullBrightEnabled then
+					repeat wait() until _G.FullBrightEnabled
+				end
+				Lighting.ClockTime = 12
+			end
+		end)
+		Lighting:GetPropertyChangedSignal("FogEnd"):Connect(function()
+			if Lighting.FogEnd ~= 786543 and Lighting.FogEnd ~= _G.NormalLightingSettings.FogEnd then
+				_G.NormalLightingSettings.FogEnd = Lighting.FogEnd
+				if not _G.FullBrightEnabled then
+					repeat wait() until _G.FullBrightEnabled
+				end
+				Lighting.FogEnd = 786543
+			end
+		end)
+		Lighting:GetPropertyChangedSignal("GlobalShadows"):Connect(function()
+			if Lighting.GlobalShadows ~= false and Lighting.GlobalShadows ~= _G.NormalLightingSettings.GlobalShadows then
+				_G.NormalLightingSettings.GlobalShadows = Lighting.GlobalShadows
+				if not _G.FullBrightEnabled then
+					repeat wait() until _G.FullBrightEnabled
+				end
+				Lighting.GlobalShadows = false
+			end
+		end)
+		Lighting:GetPropertyChangedSignal("Ambient"):Connect(function()
+			if Lighting.Ambient ~= Color3.fromRGB(178,178,178) and Lighting.Ambient ~= _G.NormalLightingSettings.Ambient then
+				_G.NormalLightingSettings.Ambient = Lighting.Ambient
+				if not _G.FullBrightEnabled then
+					repeat wait() until _G.FullBrightEnabled
+				end
+				Lighting.Ambient = Color3.fromRGB(178,178,178)
+			end
+		end)
+		Lighting.Brightness = 1
+		Lighting.ClockTime = 12
+		Lighting.FogEnd = 786543
+		Lighting.GlobalShadows = false
+		Lighting.Ambient = Color3.fromRGB(178,178,178)
+		
+		local LatestValue = true
+		spawn(function()
+			repeat wait() until _G.FullBrightEnabled
+			while wait() do
+				if _G.FullBrightEnabled ~= LatestValue then
+					if not _G.FullBrightEnabled then
+						Lighting.Brightness = _G.NormalLightingSettings.Brightness
+						Lighting.ClockTime = _G.NormalLightingSettings.ClockTime
+						Lighting.FogEnd = _G.NormalLightingSettings.FogEnd
+						Lighting.GlobalShadows = _G.NormalLightingSettings.GlobalShadows
+						Lighting.Ambient = _G.NormalLightingSettings.Ambient
+					else
+						Lighting.Brightness = 1
+						Lighting.ClockTime = 12
+						Lighting.FogEnd = 786543
+						Lighting.GlobalShadows = false
+						Lighting.Ambient = Color3.fromRGB(178,178,178)
+					end
+					LatestValue = not LatestValue
+				end
+			end
+		end)
+		_G.FullBrightExecuted = true
+	end
+	_G.FullBrightEnabled = not _G.FullBrightEnabled
+	fullBrightButton.Text = "FullBright: " .. (_G.FullBrightEnabled and "ON" or "OFF")
+end)
+
+------------------------------------------------------------
+-- SECTION 3: PLAYER TELEPORTATION (Right Column - Top Half)
+------------------------------------------------------------
+local playerSection = Instance.new("Frame")
+playerSection.Name = "PlayerSection"
+playerSection.Size = UDim2.new(1, 0, 0.5, 0)  -- Top half of right column
+playerSection.Position = UDim2.new(0, 0, 0, 0)
+playerSection.BackgroundTransparency = 1
+playerSection.Parent = rightColumn
+
+local playerLabel = Instance.new("TextLabel")
+playerLabel.Name = "PlayerLabel"
+playerLabel.Size = UDim2.new(0, 230, 0, 20)
+playerLabel.Position = UDim2.new(0, 10, 0, 5)
+playerLabel.BackgroundTransparency = 1
+playerLabel.Text = "Player Teleportation"
+playerLabel.TextColor3 = Color3.new(1, 1, 1)
+playerLabel.TextScaled = true
+playerLabel.Parent = playerSection
+
+local selectPlayerButton = Instance.new("TextButton")
+selectPlayerButton.Name = "SelectPlayerButton"
+selectPlayerButton.Size = UDim2.new(0, 230, 0, 30)
+selectPlayerButton.Position = UDim2.new(0, 10, 0, 30)
+selectPlayerButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+selectPlayerButton.BorderSizePixel = 0
+selectPlayerButton.Text = "Select Player"
+selectPlayerButton.TextColor3 = Color3.new(1, 1, 1)
+selectPlayerButton.TextScaled = true
+selectPlayerButton.Parent = playerSection
+
+local playerDropdown = Instance.new("ScrollingFrame")
+playerDropdown.Name = "PlayerDropdown"
+playerDropdown.Size = UDim2.new(0, 230, 0, 150)
+playerDropdown.Position = UDim2.new(0, 10, 0, 65)
+playerDropdown.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+playerDropdown.BorderSizePixel = 0
+playerDropdown.Visible = false
+playerDropdown.Parent = playerSection
+
+local playerListLayout = Instance.new("UIListLayout")
+playerListLayout.Parent = playerDropdown
+playerListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+local selectedPlayer = nil
+
+local function populatePlayerDropdown()
+	-- Clear existing player buttons
+	for _, child in ipairs(playerDropdown:GetChildren()) do
+		if child:IsA("TextButton") then
+			child:Destroy()
+		end
+	end
+	
+	for _, p in ipairs(Players:GetPlayers()) do
+		if p ~= player then
+			local playerButton = Instance.new("TextButton")
+			playerButton.Size = UDim2.new(1, 0, 0, 30)
+			playerButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+			playerButton.BorderSizePixel = 0
+			playerButton.Text = p.Name
+			playerButton.TextScaled = true
+			playerButton.Parent = playerDropdown
+			
+			playerButton.MouseButton1Click:Connect(function()
+				selectedPlayer = p
+				selectPlayerButton.Text = "Player: " .. p.Name
+				playerDropdown.Visible = false
+			end)
+		end
+	end
+	-- Update CanvasSize to display all players
+	playerDropdown.CanvasSize = UDim2.new(0, 0, 0, playerListLayout.AbsoluteContentSize.Y)
+end
+
+selectPlayerButton.MouseButton1Click:Connect(function()
+	playerDropdown.Visible = not playerDropdown.Visible
+	-- On opening, refresh the list immediately.
+	if playerDropdown.Visible then
+		populatePlayerDropdown()
+	end
+end)
+
+-- Auto-refresh the player dropdown every 0.75 seconds if visible.
+spawn(function()
+	while true do
+		wait(0.75)
+		if playerDropdown.Visible then
+			populatePlayerDropdown()
+		end
+	end
+end)
+
+local teleportToPlayerButton = Instance.new("TextButton")
+teleportToPlayerButton.Name = "TeleportToPlayerButton"
+teleportToPlayerButton.Size = UDim2.new(0, 230, 0, 30)
+teleportToPlayerButton.Position = UDim2.new(0, 10, 0, 220)
+teleportToPlayerButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+teleportToPlayerButton.BorderSizePixel = 0
+teleportToPlayerButton.Text = "Teleport To Player"
+teleportToPlayerButton.TextColor3 = Color3.new(1, 1, 1)
+teleportToPlayerButton.TextScaled = true
+teleportToPlayerButton.Parent = playerSection
+
+teleportToPlayerButton.MouseButton1Click:Connect(function()
+	if selectedPlayer then
+		local targetCharacter = selectedPlayer.Character
+		if targetCharacter and targetCharacter:FindFirstChild("HumanoidRootPart") then
+			local targetCFrame = targetCharacter.HumanoidRootPart.CFrame
+			local character = player.Character or player.CharacterAdded:Wait()
+			local root = character:FindFirstChild("HumanoidRootPart")
+			if root then
+				root.CFrame = targetCFrame
+			else
+				warn("Local player's HumanoidRootPart not found.")
+			end
+		else
+			warn("Selected player's character or HumanoidRootPart not available.")
+		end
+	else
+		warn("No player selected.")
+	end
+end)
+
+------------------------------------------------------------
+-- SECTION 4: AIMBOT SETTINGS (Right Column - Bottom Half)
+------------------------------------------------------------
+local aimbotSection = Instance.new("Frame")
+aimbotSection.Name = "AimbotSection"
+aimbotSection.Size = UDim2.new(1, 0, 0.5, 0)  -- Bottom half of right column
+aimbotSection.Position = UDim2.new(0, 0, 0.5, 0)
+aimbotSection.BackgroundTransparency = 1
+aimbotSection.Parent = rightColumn
+
+local aimbotLabel = Instance.new("TextLabel")
+aimbotLabel.Name = "AimbotLabel"
+aimbotLabel.Size = UDim2.new(0, 230, 0, 20)
+aimbotLabel.Position = UDim2.new(0, 10, 0, 5)
+aimbotLabel.BackgroundTransparency = 1
+aimbotLabel.Text = "Aimbot Settings"
+aimbotLabel.TextColor3 = Color3.new(1, 1, 1)
+aimbotLabel.TextScaled = true
+aimbotLabel.Parent = aimbotSection
+
+local aimbotToggleButton = Instance.new("TextButton")
+aimbotToggleButton.Name = "AimbotToggleButton"
+aimbotToggleButton.Size = UDim2.new(0, 230, 0, 30)
+aimbotToggleButton.Position = UDim2.new(0, 10, 0, 30)
+aimbotToggleButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+aimbotToggleButton.Text = "AIMBOT: OFF"
+aimbotToggleButton.TextColor3 = Color3.fromRGB(255, 50, 50)
+aimbotToggleButton.TextScaled = true
+aimbotToggleButton.Parent = aimbotSection
+
+local fovTextBox = Instance.new("TextBox")
+fovTextBox.Name = "FOVTextBox"
+fovTextBox.Size = UDim2.new(0, 230, 0, 30)
+fovTextBox.Position = UDim2.new(0, 10, 0, 70)
+fovTextBox.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+fovTextBox.BorderSizePixel = 0
+fovTextBox.Text = "136"  -- Default FOV value
+fovTextBox.TextColor3 = Color3.new(1, 1, 1)
+fovTextBox.TextScaled = true
+fovTextBox.ClearTextOnFocus = true
+fovTextBox.Parent = aimbotSection
+
+------------------------------------------------------------
+-- AIMBOT CODE & DRAWING SETUP
+------------------------------------------------------------
+local fov = 136
+local isAiming = false
+
+-- Create a Drawing circle for the FOV indicator
+local FOVring = Drawing.new("Circle")
+FOVring.Visible = false
+FOVring.Thickness = 2
+FOVring.Color = Color3.fromRGB(128, 0, 128)
+FOVring.Filled = false
+FOVring.Radius = fov
+FOVring.Position = Cam.ViewportSize / 2
+
+local function isNPC(obj)
+    return obj:IsA("Model") 
+        and obj:FindFirstChild("Humanoid")
+        and obj.Humanoid.Health > 0
+        and obj:FindFirstChild("Head")
+        and obj:FindFirstChild("HumanoidRootPart")
+        and not Players:GetPlayerFromCharacter(obj)
+end
+
+local validNPCs = {}
+local raycastParams = RaycastParams.new()
+raycastParams.FilterType = Enum.RaycastFilterType.Blacklist
+
+local function updateNPCs()
+    local tempTable = {}
+    for _, obj in ipairs(workspace:GetDescendants()) do
+        if isNPC(obj) then
+            tempTable[obj] = true
+        end
+    end
+    for i = #validNPCs, 1, -1 do
+        if not tempTable[validNPCs[i]] then
+            table.remove(validNPCs, i)
+        end
+    end
+    for obj in pairs(tempTable) do
+        if not table.find(validNPCs, obj) then
+            table.insert(validNPCs, obj)
+        end
+    end
+end
+
+local function predictPos(target)
+    local rootPart = target:FindFirstChild("HumanoidRootPart")
+    local head = target:FindFirstChild("Head")
+    if not rootPart or not head then
+        return head and head.Position or rootPart and rootPart.Position
+    end
+    local velocity = rootPart.Velocity
+    local predictionTime = 0.02
+    local basePosition = rootPart.Position + velocity * predictionTime
+    local headOffset = head.Position - rootPart.Position
+    return basePosition + headOffset
+end
+
+local function getTarget()
+    local nearest = nil
+    local minDistance = math.huge
+    local viewportCenter = Cam.ViewportSize / 2
+    raycastParams.FilterDescendantsInstances = {player.Character}
+    for _, npc in ipairs(validNPCs) do
+        local predictedPos = predictPos(npc)
+        local screenPos, visible = Cam:WorldToViewportPoint(predictedPos)
+        if visible and screenPos.Z > 0 then
+            local ray = workspace:Raycast(
+                Cam.CFrame.Position,
+                (predictedPos - Cam.CFrame.Position).Unit * 1000,
+                raycastParams
+            )
+            if ray and ray.Instance:IsDescendantOf(npc) then
+                local distance = (Vector2.new(screenPos.X, screenPos.Y) - viewportCenter).Magnitude
+                if distance < minDistance and distance < fov then
+                    minDistance = distance
+                    nearest = npc
+                end
+            end
+        end
+    end
+    return nearest
+end
+
+local function aim(targetPosition)
+    local currentCF = Cam.CFrame
+    local targetDirection = (targetPosition - currentCF.Position).Unit
+    local smoothFactor = 0.581
+    local newLookVector = currentCF.LookVector:Lerp(targetDirection, smoothFactor)
+    Cam.CFrame = CFrame.new(currentCF.Position, currentCF.Position + newLookVector)
+end
+
+local heartbeat = RunService.Heartbeat
+local lastUpdate = 0
+local UPDATE_INTERVAL = 0.4
+
+heartbeat:Connect(function(dt)
+    FOVring.Position = Cam.ViewportSize / 2
+    FOVring.Radius = fov * (Cam.ViewportSize.Y / 1080)
+    lastUpdate = lastUpdate + dt
+    if lastUpdate >= UPDATE_INTERVAL then
+        updateNPCs()
+        lastUpdate = 0
+    end
+    if isAiming then
+        local target = getTarget()
+        if target then
+            local predictedPosition = predictPos(target)
+            aim(predictedPosition)
+        end
+    end
+end)
+
+fovTextBox.FocusLost:Connect(function(enterPressed)
+    local newFov = tonumber(fovTextBox.Text)
+    if newFov then
+        fov = newFov
+    else
+        fovTextBox.Text = tostring(fov)
+    end
+end)
+
+aimbotToggleButton.MouseButton1Click:Connect(function()
+    isAiming = not isAiming
+    FOVring.Visible = isAiming
+    aimbotToggleButton.Text = "AIMBOT: " .. (isAiming and "ON" or "OFF")
+    aimbotToggleButton.TextColor3 = isAiming and Color3.fromRGB(50, 255, 50) or Color3.fromRGB(255, 50, 50)
+end)
+
+Players.PlayerRemoving:Connect(function()
+    FOVring:Remove()
+end)
+
+------------------------------------------------------------
+-- DRAGGABLE UI (for the TeleportPanel)
+------------------------------------------------------------
+local dragging, dragStart, startPos
+
+teleportPanel.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = teleportPanel.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+teleportPanel.InputChanged:Connect(function(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement) then
+        local delta = input.Position - dragStart
+        teleportPanel.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+------------------------------------------------------------
+-- (Optional) CREDIT LABEL
+------------------------------------------------------------
+local creditLabel = Instance.new("TextLabel")
+creditLabel.Name = "CreditLabel"
+creditLabel.Size = UDim2.new(0, 200, 0, 20)
+creditLabel.Position = UDim2.new(1, -10, 1, -10)
+creditLabel.AnchorPoint = Vector2.new(1, 1)
+creditLabel.BackgroundTransparency = 1
+creditLabel.TextColor3 = Color3.new(1, 1, 1)
+creditLabel.Text = "Made by TN Roblox"
+creditLabel.TextScaled = true
+creditLabel.Parent = teleportPanel
+game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessedEvent)
+  if input.KeyCode == Enum.KeyCode.Z and not gameProcessedEvent then
+   for _, item in ipairs(runtimeItemsFolder:GetChildren()) do
+		teleportItem(item)
+	end
+	-- Clear selection after action
+	selectedItems = {}
+	updateSelectedItemsDisplayLabel()
+	populateItemsList()
+  end
+end)
+game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessedEvent)
+  if input.KeyCode == Enum.KeyCode.X and not gameProcessedEvent then
+    for groupName, _ in pairs(selectedItems) do
+		for _, item in ipairs(runtimeItemsFolder:GetChildren()) do
+			if item.Name == groupName then
+				teleportItem(item)
+			end
+		end
+	end
+	-- Clear selection after action
+	selectedItems = {}
+	updateSelectedItemsDisplayLabel()
+	populateItemsList()
+  end
+end)
+game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessedEvent)
+  if input.KeyCode == Enum.KeyCode.C and not gameProcessedEvent then
+    for groupName, _ in pairs(selectedItems) do
+		for _, item in ipairs(runtimeItemsFolder:GetChildren()) do
+			if item.Name == groupName then
+				local args = { [1] = item }
+				ReplicatedStorage.Remotes.StoreItem:FireServer(unpack(args))
+			end
+		end
+	end
+	-- Clear selection after action
+	selectedItems = {}
+	updateSelectedItemsDisplayLabel()
+	populateItemsList()
+  end
+end)
+game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessedEvent)
+  if input.KeyCode == Enum.KeyCode.K and not gameProcessedEvent then
+    teleportPanel.Visible = not teleportPanel.Visible
+	toggleButton.Text = teleportPanel.Visible and "Hide" or "Show"
+  end
+end)
