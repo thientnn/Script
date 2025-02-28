@@ -1,1 +1,1 @@
-key ?
+local key = "key"
