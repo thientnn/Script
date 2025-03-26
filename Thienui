@@ -1,0 +1,1028 @@
+-- RoUI Library
+-- A comprehensive, mobile-friendly Roblox UI library
+
+local RoUI = {}
+RoUI.__index = RoUI
+
+-- Constants
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+-- Utility Functions
+local function Tween(instance, properties, duration, easingStyle, easingDirection)
+    local tInfo = TweenInfo.new(
+        duration or 0.3, 
+        easingStyle or Enum.EasingStyle.Quad, 
+        easingDirection or Enum.EasingDirection.Out
+    )
+    local tween = TweenService:Create(instance, tInfo, properties)
+    tween:Play()
+    return tween
+end
+
+local function CreateInstance(className, properties)
+    local instance = Instance.new(className)
+    for property, value in pairs(properties) do
+        instance[property] = value
+    end
+    return instance
+end
+
+local function IsMobile()
+    return UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled and not UserInputService.MouseEnabled
+end
+
+-- Main Library
+function RoUI.new(title, theme)
+    local self = setmetatable({}, RoUI)
+    self.Theme = theme or {
+        Background = Color3.fromRGB(30, 30, 30),
+        Secondary = Color3.fromRGB(45, 45, 45),
+        Accent = Color3.fromRGB(65, 105, 225),
+        Text = Color3.fromRGB(255, 255, 255),
+        StrokeColor = Color3.fromRGB(80, 80, 80),
+        ElementBackground = Color3.fromRGB(40, 40, 40)
+    }
+    self.IsMobile = IsMobile()
+    self.Tabs = {}
+    self.ActiveTab = nil
+    
+    -- Create ScreenGui
+    self.ScreenGui = CreateInstance("ScreenGui", {
+        Name = "RoUI",
+        ResetOnSpawn = false,
+        ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
+        Parent = game.CoreGui
+    })
+    
+    -- Create Main Frame
+    self.MainFrame = CreateInstance("Frame", {
+        Name = "MainFrame",
+        Size = UDim2.new(0, self.IsMobile and 300 or 500, 0, self.IsMobile and 400 or 350),
+        Position = UDim2.new(0.5, -250, 0.5, -175),
+        BackgroundColor3 = self.Theme.Background,
+        BorderSizePixel = 0,
+        Active = true,
+        Parent = self.ScreenGui
+    })
+    
+    -- Make UI draggable (PC only)
+    if not self.IsMobile then
+        local isDragging = false
+        local dragStart
+        local startPos
+        
+        self.MainFrame.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                isDragging = true
+                dragStart = input.Position
+                startPos = self.MainFrame.Position
+            end
+        end)
+        
+        self.MainFrame.InputEnded:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                isDragging = false
+            end
+        end)
+        
+        Mouse.Move:Connect(function()
+            if isDragging then
+                local delta = Vector2.new(Mouse.X, Mouse.Y) - dragStart
+                self.MainFrame.Position = UDim2.new(
+                    startPos.X.Scale, 
+                    startPos.X.Offset + delta.X, 
+                    startPos.Y.Scale, 
+                    startPos.Y.Offset + delta.Y
+                )
+            end
+        end)
+    end
+    
+    -- Corner rounding
+    local uiCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(0, 6),
+        Parent = self.MainFrame
+    })
+    
+    -- Title Bar
+    self.TitleBar = CreateInstance("Frame", {
+        Name = "TitleBar",
+        Size = UDim2.new(1, 0, 0, 30),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = self.Theme.Secondary,
+        BorderSizePixel = 0,
+        Parent = self.MainFrame
+    })
+    
+    local titleBarCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(0, 6),
+        Parent = self.TitleBar
+    })
+    
+    -- Fix the corner rounding for the title bar
+    local titleBarFix = CreateInstance("Frame", {
+        Name = "CornerFix",
+        Size = UDim2.new(1, 0, 0.5, 0),
+        Position = UDim2.new(0, 0, 0.5, 0),
+        BackgroundColor3 = self.Theme.Secondary,
+        BorderSizePixel = 0,
+        Parent = self.TitleBar
+    })
+    
+    -- Title Text
+    self.TitleText = CreateInstance("TextLabel", {
+        Name = "TitleText",
+        Size = UDim2.new(1, -40, 1, 0),
+        Position = UDim2.new(0, 10, 0, 0),
+        BackgroundTransparency = 1,
+        Text = title or "RoUI Library",
+        TextColor3 = self.Theme.Text,
+        TextSize = 16,
+        Font = Enum.Font.SourceSansBold,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = self.TitleBar
+    })
+    
+    -- Close Button
+    self.CloseButton = CreateInstance("TextButton", {
+        Name = "CloseButton",
+        Size = UDim2.new(0, 24, 0, 24),
+        Position = UDim2.new(1, -27, 0, 3),
+        BackgroundTransparency = 1,
+        Text = "×",
+        TextColor3 = self.Theme.Text,
+        TextSize = 20,
+        Font = Enum.Font.SourceSansBold,
+        Parent = self.TitleBar
+    })
+    
+    self.CloseButton.MouseButton1Click:Connect(function()
+        self.ScreenGui:Destroy()
+    end)
+    
+    -- Content Container
+    self.Container = CreateInstance("Frame", {
+        Name = "Container",
+        Size = UDim2.new(1, 0, 1, -30),
+        Position = UDim2.new(0, 0, 0, 30),
+        BackgroundColor3 = self.Theme.Background,
+        BorderSizePixel = 0,
+        ClipsDescendants = true,
+        Parent = self.MainFrame
+    })
+    
+    -- Tab Bar
+    self.TabBar = CreateInstance("Frame", {
+        Name = "TabBar",
+        Size = UDim2.new(1, 0, 0, 35),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundColor3 = self.Theme.Secondary,
+        BorderSizePixel = 0,
+        Parent = self.Container
+    })
+    
+    -- Tab Button Container (Scrolling Frame for many tabs)
+    self.TabButtonContainer = CreateInstance("ScrollingFrame", {
+        Name = "TabButtonContainer",
+        Size = UDim2.new(1, 0, 1, 0),
+        CanvasSize = UDim2.new(0, 0, 0, 0),
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        ScrollBarThickness = 2,
+        ScrollingDirection = Enum.ScrollingDirection.X,
+        AutomaticCanvasSize = Enum.AutomaticSize.X,
+        Parent = self.TabBar
+    })
+    
+    -- Tab Content Container
+    self.TabContentContainer = CreateInstance("Frame", {
+        Name = "TabContentContainer",
+        Size = UDim2.new(1, 0, 1, -35),
+        Position = UDim2.new(0, 0, 0, 35),
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        Parent = self.Container
+    })
+    
+    -- Tab Button Layout
+    local tabButtonLayout = CreateInstance("UIListLayout", {
+        FillDirection = Enum.FillDirection.Horizontal,
+        HorizontalAlignment = Enum.HorizontalAlignment.Left,
+        SortOrder = Enum.SortOrder.LayoutOrder,
+        Padding = UDim.new(0, 5),
+        Parent = self.TabButtonContainer
+    })
+    
+    -- Padding for tab buttons
+    local tabButtonPadding = CreateInstance("UIPadding", {
+        PaddingLeft = UDim.new(0, 5),
+        PaddingRight = UDim.new(0, 5),
+        Parent = self.TabButtonContainer
+    })
+    
+    return self
+end
+
+function RoUI:AddTab(name, icon)
+    local tab = {}
+    tab.Name = name
+    tab.Icon = icon
+    tab.Elements = {}
+    
+    -- Create Tab Button
+    tab.Button = CreateInstance("TextButton", {
+        Name = name .. "Button",
+        Size = UDim2.new(0, self.IsMobile and 80 or 100, 1, -10),
+        BackgroundColor3 = self.Theme.ElementBackground,
+        BorderSizePixel = 0,
+        Text = "",
+        AutoButtonColor = false,
+        Parent = self.TabButtonContainer
+    })
+    
+    -- Button Rounding
+    local buttonCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(0, 4),
+        Parent = tab.Button
+    })
+    
+    -- Tab Button Icon (if provided)
+    if icon then
+        tab.IconImage = CreateInstance("ImageLabel", {
+            Name = "IconImage",
+            Size = UDim2.new(0, 16, 0, 16),
+            Position = UDim2.new(0, 10, 0.5, -8),
+            BackgroundTransparency = 1,
+            Image = icon,
+            Parent = tab.Button
+        })
+        
+        tab.ButtonText = CreateInstance("TextLabel", {
+            Name = "ButtonText",
+            Size = UDim2.new(1, -36, 1, 0),
+            Position = UDim2.new(0, 30, 0, 0),
+            BackgroundTransparency = 1,
+            Text = name,
+            TextColor3 = self.Theme.Text,
+            TextSize = 14,
+            Font = Enum.Font.SourceSansSemibold,
+            TextXAlignment = Enum.TextXAlignment.Left,
+            Parent = tab.Button
+        })
+    else
+        tab.ButtonText = CreateInstance("TextLabel", {
+            Name = "ButtonText",
+            Size = UDim2.new(1, -10, 1, 0),
+            Position = UDim2.new(0, 5, 0, 0),
+            BackgroundTransparency = 1,
+            Text = name,
+            TextColor3 = self.Theme.Text,
+            TextSize = 14,
+            Font = Enum.Font.SourceSansSemibold,
+            TextXAlignment = Enum.TextXAlignment.Center,
+            Parent = tab.Button
+        })
+    end
+    
+    -- Tab Content Frame
+    tab.ContentFrame = CreateInstance("ScrollingFrame", {
+        Name = name .. "Content",
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        ScrollBarThickness = 4,
+        ScrollingDirection = Enum.ScrollingDirection.Y,
+        AutomaticCanvasSize = Enum.AutomaticSize.Y,
+        CanvasSize = UDim2.new(0, 0, 0, 0),
+        Visible = false,
+        Parent = self.TabContentContainer
+    })
+    
+    -- Content Padding
+    local contentPadding = CreateInstance("UIPadding", {
+        PaddingLeft = UDim.new(0, 10),
+        PaddingRight = UDim.new(0, 10),
+        PaddingTop = UDim.new(0, 10),
+        PaddingBottom = UDim.new(0, 10),
+        Parent = tab.ContentFrame
+    })
+    
+    -- Content Layout
+    tab.ContentLayout = CreateInstance("UIListLayout", {
+        FillDirection = Enum.FillDirection.Vertical,
+        HorizontalAlignment = Enum.HorizontalAlignment.Center,
+        SortOrder = Enum.SortOrder.LayoutOrder,
+        Padding = UDim.new(0, 8),
+        Parent = tab.ContentFrame
+    })
+    
+    -- Tab Button Click Handler
+    tab.Button.MouseButton1Click:Connect(function()
+        self:SelectTab(name)
+    end)
+    
+    table.insert(self.Tabs, tab)
+    
+    -- Select this tab if it's the first one
+    if #self.Tabs == 1 then
+        self:SelectTab(name)
+    end
+    
+    -- Return tab methods
+    return {
+        AddButton = function(text, callback)
+            return self:AddButton(tab, text, callback)
+        end,
+        AddToggle = function(text, default, callback)
+            return self:AddToggle(tab, text, default, callback)
+        end,
+        AddDropdown = function(text, options, default, callback)
+            return self:AddDropdown(tab, text, options, default, callback)
+        end,
+        AddSlider = function(text, min, max, default, callback)
+            return self:AddSlider(tab, text, min, max, default, callback)
+        end,
+        AddSection = function(text)
+            return self:AddSection(tab, text)
+        end,
+        AddNote = function(text)
+            return self:AddNote(tab, text)
+        end
+    }
+end
+
+function RoUI:SelectTab(name)
+    for _, tab in ipairs(self.Tabs) do
+        if tab.Name == name then
+            tab.ContentFrame.Visible = true
+            Tween(tab.Button, {BackgroundColor3 = self.Theme.Accent}, 0.2)
+            tab.ButtonText.TextColor3 = Color3.fromRGB(255, 255, 255)
+            self.ActiveTab = tab
+        else
+            tab.ContentFrame.Visible = false
+            Tween(tab.Button, {BackgroundColor3 = self.Theme.ElementBackground}, 0.2)
+            tab.ButtonText.TextColor3 = self.Theme.Text
+        end
+    end
+end
+
+function RoUI:AddButton(tab, text, callback)
+    local button = {}
+    
+    -- Create Button Container
+    button.Container = CreateInstance("Frame", {
+        Name = "ButtonContainer",
+        Size = UDim2.new(1, 0, 0, 35),
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        Parent = tab.ContentFrame
+    })
+    
+    -- Create Button
+    button.Button = CreateInstance("TextButton", {
+        Name = "Button",
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundColor3 = self.Theme.ElementBackground,
+        BorderSizePixel = 0,
+        Text = "",
+        AutoButtonColor = false,
+        Parent = button.Container
+    })
+    
+    -- Button Rounding
+    local buttonCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(0, 4),
+        Parent = button.Button
+    })
+    
+    -- Button Text
+    button.ButtonText = CreateInstance("TextLabel", {
+        Name = "ButtonText",
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundTransparency = 1,
+        Text = text,
+        TextColor3 = self.Theme.Text,
+        TextSize = 14,
+        Font = Enum.Font.SourceSans,
+        Parent = button.Button
+    })
+    
+    -- Button Hover & Click Effects
+    button.Button.MouseEnter:Connect(function()
+        Tween(button.Button, {BackgroundColor3 = Color3.fromRGB(
+            self.Theme.ElementBackground.R * 255 + 20,
+            self.Theme.ElementBackground.G * 255 + 20,
+            self.Theme.ElementBackground.B * 255 + 20
+        ) / 255}, 0.2)
+    end)
+    
+    button.Button.MouseLeave:Connect(function()
+        Tween(button.Button, {BackgroundColor3 = self.Theme.ElementBackground}, 0.2)
+    end)
+    
+    button.Button.MouseButton1Down:Connect(function()
+        Tween(button.Button, {BackgroundColor3 = self.Theme.Accent}, 0.1)
+    end)
+    
+    button.Button.MouseButton1Up:Connect(function()
+        Tween(button.Button, {BackgroundColor3 = self.Theme.ElementBackground}, 0.1)
+    end)
+    
+    button.Button.MouseButton1Click:Connect(function()
+        if callback then callback() end
+    end)
+    
+    table.insert(tab.Elements, button)
+    return button
+end
+
+function RoUI:AddToggle(tab, text, default, callback)
+    local toggle = {}
+    default = default or false
+    
+    -- Create Toggle Container
+    toggle.Container = CreateInstance("Frame", {
+        Name = "ToggleContainer",
+        Size = UDim2.new(1, 0, 0, 35),
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        Parent = tab.ContentFrame
+    })
+    
+    -- Create Toggle Background
+    toggle.Background = CreateInstance("Frame", {
+        Name = "Background",
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundColor3 = self.Theme.ElementBackground,
+        BorderSizePixel = 0,
+        Parent = toggle.Container
+    })
+    
+    -- Background Rounding
+    local backgroundCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(0, 4),
+        Parent = toggle.Background
+    })
+    
+    -- Toggle Text
+    toggle.Text = CreateInstance("TextLabel", {
+        Name = "ToggleText",
+        Size = UDim2.new(1, -60, 1, 0),
+        Position = UDim2.new(0, 10, 0, 0),
+        BackgroundTransparency = 1,
+        Text = text,
+        TextColor3 = self.Theme.Text,
+        TextSize = 14,
+        Font = Enum.Font.SourceSans,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = toggle.Background
+    })
+    
+    -- Toggle Switch Background
+    toggle.SwitchBG = CreateInstance("Frame", {
+        Name = "SwitchBackground",
+        Size = UDim2.new(0, 40, 0, 20),
+        Position = UDim2.new(1, -50, 0.5, -10),
+        BackgroundColor3 = Color3.fromRGB(60, 60, 60),
+        BorderSizePixel = 0,
+        Parent = toggle.Background
+    })
+    
+    -- Switch BG Rounding
+    local switchBGCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(1, 0),
+        Parent = toggle.SwitchBG
+    })
+    
+    -- Toggle Switch Knob
+    toggle.Knob = CreateInstance("Frame", {
+        Name = "Knob",
+        Size = UDim2.new(0, 16, 0, 16),
+        Position = UDim2.new(0, 2, 0.5, -8),
+        BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+        BorderSizePixel = 0,
+        Parent = toggle.SwitchBG
+    })
+    
+    -- Knob Rounding
+    local knobCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(1, 0),
+        Parent = toggle.Knob
+    })
+    
+    -- Toggle State
+    toggle.Value = default
+    
+    -- Update visual state based on default value
+    if default then
+        toggle.SwitchBG.BackgroundColor3 = self.Theme.Accent
+        toggle.Knob.Position = UDim2.new(1, -18, 0.5, -8)
+    end
+    
+    -- Toggle Click Handler
+    toggle.Background.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            toggle.Value = not toggle.Value
+            
+            if toggle.Value then
+                Tween(toggle.SwitchBG, {BackgroundColor3 = self.Theme.Accent}, 0.2)
+                Tween(toggle.Knob, {Position = UDim2.new(1, -18, 0.5, -8)}, 0.2)
+            else
+                Tween(toggle.SwitchBG, {BackgroundColor3 = Color3.fromRGB(60, 60, 60)}, 0.2)
+                Tween(toggle.Knob, {Position = UDim2.new(0, 2, 0.5, -8)}, 0.2)
+            end
+            
+            if callback then callback(toggle.Value) end
+        end
+    end)
+    
+    -- Create API
+    toggle.SetValue = function(value)
+        toggle.Value = value
+        
+        if value then
+            Tween(toggle.SwitchBG, {BackgroundColor3 = self.Theme.Accent}, 0.2)
+            Tween(toggle.Knob, {Position = UDim2.new(1, -18, 0.5, -8)}, 0.2)
+        else
+            Tween(toggle.SwitchBG, {BackgroundColor3 = Color3.fromRGB(60, 60, 60)}, 0.2)
+            Tween(toggle.Knob, {Position = UDim2.new(0, 2, 0.5, -8)}, 0.2)
+        end
+        
+        if callback then callback(toggle.Value) end
+    end
+    
+    table.insert(tab.Elements, toggle)
+    return toggle
+end
+
+function RoUI:AddDropdown(tab, text, options, default, callback)
+    local dropdown = {}
+    options = options or {}
+    dropdown.Options = options
+    dropdown.Value = default or (options[1] or "")
+    dropdown.Open = false
+    
+    -- Create Dropdown Container
+    dropdown.Container = CreateInstance("Frame", {
+        Name = "DropdownContainer",
+        Size = UDim2.new(1, 0, 0, 35),
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        ClipsDescendants = true,
+        Parent = tab.ContentFrame
+    })
+    
+    -- Create Dropdown Header
+    dropdown.Header = CreateInstance("Frame", {
+        Name = "Header",
+        Size = UDim2.new(1, 0, 0, 35),
+        BackgroundColor3 = self.Theme.ElementBackground,
+        BorderSizePixel = 0,
+        Parent = dropdown.Container
+    })
+    
+    -- Header Rounding
+    local headerCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(0, 4),
+        Parent = dropdown.Header
+    })
+    
+    -- Dropdown Text
+    dropdown.Text = CreateInstance("TextLabel", {
+        Name = "DropdownText",
+        Size = UDim2.new(0.5, 0, 1, 0),
+        Position = UDim2.new(0, 10, 0, 0),
+        BackgroundTransparency = 1,
+        Text = text,
+        TextColor3 = self.Theme.Text,
+        TextSize = 14,
+        Font = Enum.Font.SourceSans,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = dropdown.Header
+    })
+    
+    -- Selected Value Text
+    dropdown.SelectedText = CreateInstance("TextLabel", {
+        Name = "SelectedText",
+        Size = UDim2.new(0.5, -40, 1, 0),
+        Position = UDim2.new(0.5, 0, 0, 0),
+        BackgroundTransparency = 1,
+        Text = dropdown.Value,
+        TextColor3 = self.Theme.Accent,
+        TextSize = 14,
+        Font = Enum.Font.SourceSans,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = dropdown.Header
+    })
+    
+    -- Dropdown Arrow
+    dropdown.Arrow = CreateInstance("TextLabel", {
+        Name = "Arrow",
+        Size = UDim2.new(0, 20, 0, 20),
+        Position = UDim2.new(1, -25, 0.5, -10),
+        BackgroundTransparency = 1,
+        Text = "▼",
+        TextColor3 = self.Theme.Text,
+        TextSize = 14,
+        Font = Enum.Font.SourceSansBold,
+        Parent = dropdown.Header
+    })
+    
+    -- Dropdown Options List
+    dropdown.OptionList = CreateInstance("Frame", {
+        Name = "OptionList",
+        Size = UDim2.new(1, 0, 0, 0), -- Will be resized based on options
+        Position = UDim2.new(0, 0, 0, 35),
+        BackgroundColor3 = self.Theme.ElementBackground,
+        BorderSizePixel = 0,
+        Visible = false,
+        Parent = dropdown.Container
+    })
+    
+    -- Options List Rounding
+    local optionListCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(0, 4),
+        Parent = dropdown.OptionList
+    })
+    
+    -- Options List Layout
+    local optionListLayout = CreateInstance("UIListLayout", {
+        FillDirection = Enum.FillDirection.Vertical,
+        HorizontalAlignment = Enum.HorizontalAlignment.Left,
+        SortOrder = Enum.SortOrder.LayoutOrder,
+        Padding = UDim.new(0, 2),
+        Parent = dropdown.OptionList
+    })
+    
+    -- Create option buttons
+    dropdown.OptionButtons = {}
+    
+    local function CreateOptions()
+        -- Clear existing options
+        for _, button in pairs(dropdown.OptionButtons) do
+            button:Destroy()
+        end
+        dropdown.OptionButtons = {}
+        
+        -- Create new options
+        for i, option in ipairs(dropdown.Options) do
+            local optionButton = CreateInstance("TextButton", {
+                Name = "Option_" .. i,
+                Size = UDim2.new(1, 0, 0, 30),
+                BackgroundTransparency = 1,
+                Text = option,
+                TextColor3 = self.Theme.Text,
+                TextSize = 14,
+                Font = Enum.Font.SourceSans,
+                Parent = dropdown.OptionList
+            })
+            
+            optionButton.MouseEnter:Connect(function()
+                Tween(optionButton, {BackgroundTransparency = 0.9}, 0.2)
+            end)
+            
+            optionButton.MouseLeave:Connect(function()
+                Tween(optionButton, {BackgroundTransparency = 1}, 0.2)
+            end)
+            
+            optionButton.MouseButton1Click:Connect(function()
+                dropdown.Value = option
+                dropdown.SelectedText.Text = option
+                dropdown:Toggle()
+                
+                if callback then callback(option) end
+            end)
+            
+            table.insert(dropdown.OptionButtons, optionButton)
+        end
+        
+        -- Resize option list
+        dropdown.OptionList.Size = UDim2.new(1, 0, 0, #dropdown.Options * 30 + (#dropdown.Options - 1) * 2)
+        dropdown.Container.Size = UDim2.new(1, 0, 0, dropdown.Open and (35 + dropdown.OptionList.Size.Y.Offset) or 35)
+    end
+    
+    -- Initial creation of options
+    CreateOptions()
+    
+    -- Toggle dropdown visibility
+    dropdown.Toggle = function(self)
+        dropdown.Open = not dropdown.Open
+        dropdown.OptionList.Visible = dropdown.Open
+        
+        if dropdown.Open then
+            Tween(dropdown.Arrow, {Rotation = 180}, 0.2)
+        else
+            Tween(dropdown.Arrow, {Rotation = 0}, 0.2)
+        end
+        
+        Tween(dropdown.Container, {Size = UDim2.new(1, 0, 0, dropdown.Open and (35 + dropdown.OptionList.Size.Y.Offset) or 35)}, 0.2)
+    end
+    
+    -- Header click handler
+    dropdown.Header.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dropdown:Toggle()
+        end
+    end)
+    
+    -- Set options method
+    dropdown.SetOptions = function(self, newOptions)
+        dropdown.Options = newOptions
+        dropdown.Value = newOptions[1] or ""
+        dropdown.SelectedText.Text = dropdown.Value
+        CreateOptions()
+    end
+    
+    -- Set value method
+    dropdown.SetValue = function(self, value)
+        if table.find(dropdown.Options, value) then
+            dropdown.Value = value
+            dropdown.SelectedText.Text = value
+            if callback then callback(value) end
+        end
+    end
+    
+    table.insert(tab.Elements, dropdown)
+    return dropdown
+end
+
+function RoUI:AddSlider(tab, text, min, max, default, callback)
+    local slider = {}
+    min = min or 0
+    max = max or 100
+    default = default or min
+    slider.Value = default
+    slider.Min = min
+    slider.Max = max
+    
+    -- Create Slider Container
+    slider.Container = CreateInstance("Frame", {
+        Name = "SliderContainer",
+        Size = UDim2.new(1, 0, 0, 50),
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        Parent = tab.ContentFrame
+    })
+    
+    -- Create Slider Background
+    slider.Background = CreateInstance("Frame", {
+        Name = "Background",
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundColor3 = self.Theme.ElementBackground,
+        BorderSizePixel = 0,
+        Parent = slider.Container
+    })
+    
+    -- Background Rounding
+    local backgroundCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(0, 4),
+        Parent = slider.Background
+    })
+    
+    -- Slider Text
+    slider.Text = CreateInstance("TextLabel", {
+        Name = "SliderText",
+        Size = UDim2.new(1, -10, 0, 20),
+        Position = UDim2.new(0, 10, 0, 5),
+        BackgroundTransparency = 1,
+        Text = text,
+        TextColor3 = self.Theme.Text,
+        TextSize = 14,
+        Font = Enum.Font.SourceSans,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = slider.Background
+    })
+    
+    -- Slider Value Text
+    slider.ValueText = CreateInstance("TextLabel", {
+        Name = "ValueText",
+        Size = UDim2.new(0, 50, 0, 20),
+        Position = UDim2.new(1, -60, 0, 5),
+        BackgroundTransparency = 1,
+        Text = tostring(default),
+        TextColor3 = self.Theme.Accent,
+        TextSize = 14,
+        Font = Enum.Font.SourceSans,
+        TextXAlignment = Enum.TextXAlignment.Right,
+        Parent = slider.Background
+    })
+    
+    -- Slider Track
+    slider.Track = CreateInstance("Frame", {
+        Name = "Track",
+        Size = UDim2.new(1, -20, 0, 6),
+        Position = UDim2.new(0, 10, 0, 35),
+        BackgroundColor3 = Color3.fromRGB(60, 60, 60),
+        BorderSizePixel = 0,
+        Parent = slider.Background
+    })
+    
+    -- Track Rounding
+    local trackCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(1, 0),
+        Parent = slider.Track
+    })
+    
+    -- Slider Fill
+    slider.Fill = CreateInstance("Frame", {
+        Name = "Fill",
+        Size = UDim2.new((default - min) / (max - min), 0, 1, 0),
+        BackgroundColor3 = self.Theme.Accent,
+        BorderSizePixel = 0,
+        Parent = slider.Track
+    })
+    
+    -- Fill Rounding
+    local fillCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(1, 0),
+        Parent = slider.Fill
+    })
+    
+    -- Slider Knob
+    slider.Knob = CreateInstance("Frame", {
+        Name = "Knob",
+        Size = UDim2.new(0, 14, 0, 14),
+        Position = UDim2.new((default - min) / (max - min), 0, 0.5, -7),
+        AnchorPoint = Vector2.new(0.5, 0),
+        BackgroundColor3 = Color3.fromRGB(255, 255, 255),
+        BorderSizePixel = 0,
+        Parent = slider.Track
+    })
+    
+    -- Knob Rounding
+    local knobCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(1, 0),
+        Parent = slider.Knob
+    })
+    
+    -- Slider Interaction
+    local isDragging = false
+    
+    local function UpdateSlider(input)
+        local pos = input.Position.X
+        local trackStart = slider.Track.AbsolutePosition.X
+        local trackEnd = trackStart + slider.Track.AbsoluteSize.X
+        local relativePos = math.clamp((pos - trackStart) / (trackEnd - trackStart), 0, 1)
+        
+        slider.Value = min + relativePos * (max - min)
+        slider.Value = math.floor(slider.Value * 10) / 10 -- Round to 1 decimal place
+        
+        -- Update visual elements
+        slider.Fill.Size = UDim2.new(relativePos, 0, 1, 0)
+        slider.Knob.Position = UDim2.new(relativePos, 0, 0.5, -7)
+        slider.ValueText.Text = tostring(slider.Value)
+        
+        if callback then callback(slider.Value) end
+    end
+    
+    slider.Track.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            isDragging = true
+            UpdateSlider(input)
+        end
+    end)
+    
+    slider.Track.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            isDragging = false
+        end
+    end)
+    
+    UserInputService.InputChanged:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) and isDragging then
+            UpdateSlider(input)
+        end
+    end)
+    
+    -- Set value method
+    slider.SetValue = function(self, value)
+        value = math.clamp(value, min, max)
+        slider.Value = value
+        
+        local relativePos = (value - min) / (max - min)
+        slider.Fill.Size = UDim2.new(relativePos, 0, 1, 0)
+        slider.Knob.Position = UDim2.new(relativePos, 0, 0.5, -7)
+        slider.ValueText.Text = tostring(value)
+        
+        if callback then callback(value) end
+    end
+    
+    table.insert(tab.Elements, slider)
+    return slider
+end
+
+function RoUI:AddSection(tab, text)
+    local section = {}
+    
+    -- Create Section Container
+    section.Container = CreateInstance("Frame", {
+        Name = "SectionContainer",
+        Size = UDim2.new(1, 0, 0, 30),
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        Parent = tab.ContentFrame
+    })
+    
+    -- Section Text
+    section.Text = CreateInstance("TextLabel", {
+        Name = "SectionText",
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundTransparency = 1,
+        Text = text,
+        TextColor3 = self.Theme.Accent,
+        TextSize = 16,
+        Font = Enum.Font.SourceSansBold,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = section.Container
+    })
+    
+    -- Divider Line
+    section.Divider = CreateInstance("Frame", {
+        Name = "Divider",
+        Size = UDim2.new(1, 0, 0, 1),
+        Position = UDim2.new(0, 0, 1, -1),
+        BackgroundColor3 = self.Theme.StrokeColor,
+        BorderSizePixel = 0,
+        Parent = section.Container
+    })
+    
+    table.insert(tab.Elements, section)
+    return section
+end
+
+function RoUI:AddNote(tab, text)
+    local note = {}
+    
+    -- Create Note Container
+    note.Container = CreateInstance("Frame", {
+        Name = "NoteContainer",
+        Size = UDim2.new(1, 0, 0, 0), -- Auto-sized based on text
+        BackgroundTransparency = 1,
+        BorderSizePixel = 0,
+        AutomaticSize = Enum.AutomaticSize.Y,
+        Parent = tab.ContentFrame
+    })
+    
+    -- Note Background
+    note.Background = CreateInstance("Frame", {
+        Name = "Background",
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundColor3 = self.Theme.Secondary,
+        BorderSizePixel = 0,
+        AutomaticSize = Enum.AutomaticSize.Y,
+        Parent = note.Container
+    })
+    
+    -- Background Rounding
+    local backgroundCorner = CreateInstance("UICorner", {
+        CornerRadius = UDim.new(0, 4),
+        Parent = note.Background
+    })
+    
+    -- Note Icon
+    note.Icon = CreateInstance("TextLabel", {
+        Name = "Icon",
+        Size = UDim2.new(0, 20, 0, 20),
+        Position = UDim2.new(0, 10, 0, 10),
+        BackgroundTransparency = 1,
+        Text = "ℹ",
+        TextColor3 = self.Theme.Accent,
+        TextSize = 18,
+        Font = Enum.Font.SourceSansBold,
+        Parent = note.Background
+    })
+    
+    -- Note Text
+    note.Text = CreateInstance("TextLabel", {
+        Name = "NoteText",
+        Size = UDim2.new(1, -50, 0, 0),
+        Position = UDim2.new(0, 40, 0, 10),
+        BackgroundTransparency = 1,
+        Text = text,
+        TextColor3 = self.Theme.Text,
+        TextSize = 14,
+        Font = Enum.Font.SourceSans,
+        TextWrapped = true,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        TextYAlignment = Enum.TextYAlignment.Top,
+        AutomaticSize = Enum.AutomaticSize.Y,
+        Parent = note.Background
+    })
+    
+    -- Note Padding
+    local notePadding = CreateInstance("UIPadding", {
+        PaddingBottom = UDim.new(0, 10),
+        Parent = note.Background
+    })
+    
+    table.insert(tab.Elements, note)
+    return note
+end
+
+-- Return the library
+return RoUI
