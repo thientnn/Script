@@ -1268,6 +1268,69 @@ function RoUI:AddNote(tab, text)
     table.insert(tab.Elements, note)
     return note
 end
+function RoUI:SetupDragging()
+    -- Make UI draggable (PC and Mobile)
+    local isDragging = false
+    local dragStart
+    local startPos
+    local gui = self.MainFrame
+    local dragArea = self.TitleBar
+    
+    -- Function to update drag position with screen boundaries
+    local function UpdateDragPosition(input)
+        local delta = input.Position - dragStart
+        local newPosition = UDim2.new(
+            startPos.X.Scale, 
+            math.clamp(startPos.X.Offset + delta.X, 0, gui.Parent.AbsoluteSize.X - gui.AbsoluteSize.X), 
+            startPos.Y.Scale, 
+            math.clamp(startPos.Y.Offset + delta.Y, 0, gui.Parent.AbsoluteSize.Y - gui.AbsoluteSize.Y)
+        )
+        gui.Position = newPosition
+    end
+    
+    -- PC and Mobile input handling
+    dragArea.InputBegan:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or 
+            input.UserInputType == Enum.UserInputType.Touch) then
+            isDragging = true
+            dragStart = input.Position
+            startPos = gui.Position
+        end
+    end)
+    
+    UserInputService.InputEnded:Connect(function(input)
+        if (input.UserInputType == Enum.UserInputType.MouseButton1 or 
+            input.UserInputType == Enum.UserInputType.Touch) then
+            isDragging = false
+        end
+    end)
+    
+    UserInputService.InputChanged:Connect(function(input)
+        if isDragging and (input.UserInputType == Enum.UserInputType.MouseMovement or 
+                          input.UserInputType == Enum.UserInputType.Touch) then
+            UpdateDragPosition(input)
+        end
+    end)
+    
+    -- Add visual feedback when dragging
+    dragArea.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+           input.UserInputType == Enum.UserInputType.Touch then
+            Tween(dragArea, {BackgroundColor3 = Color3.fromRGB(
+                math.min(self.Theme.Secondary.R * 255 + 15, 255),
+                math.min(self.Theme.Secondary.G * 255 + 15, 255),
+                math.min(self.Theme.Secondary.B * 255 + 15, 255)
+            ) / 255}, 0.2)
+        end
+    end)
+    
+    dragArea.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or 
+           input.UserInputType == Enum.UserInputType.Touch then
+            Tween(dragArea, {BackgroundColor3 = self.Theme.Secondary}, 0.2)
+        end
+    end)
+end
 
 -- Return the library
 return RoUI
